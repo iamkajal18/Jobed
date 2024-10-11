@@ -1,15 +1,21 @@
+import CategoryCarousel from "./CategoryCarousel";
+
 function HeroSection() {
   return (
     
-    <div className="w-full bg-blue-500 text-white py-20 sm:py-16 md:py-24 lg:md-47">
-      <div className="container mx-auto text-center">
-        <h1 className="text-5xl font-bold mb-4">Find Your Dream Job</h1>
-        <p className="text-xl mb-8">Join the No.1 Job Hunt Website and discover thousands of opportunities.</p>
-        <button className="bg-white text-blue-500 px-6 py-3 rounded-full font-semibold text-lg hover:bg-gray-200 transition">
-          Get Started
-        </button>
-      </div>
+    <div className="bg-blue-500 text-white py-20 sm:py-16 md:py-24">
+    <div className="container mx-auto text-center px-4">
+      <h1 className="text-4xl font-bold mb-4 sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
+        Find Your Dream Job
+      </h1>
+      <p className="text-lg mb-8 sm:text-base md:text-lg lg:text-xl">
+        Join the No.1 Job Hunt Website and discover thousands of opportunities.
+      </p>
+      <button className="bg-white text-blue-500 px-6 py-3 rounded-full font-semibold text-lg hover:bg-gray-200 transition">
+        Get Started
+      </button>
     </div>
+  </div>
   );
 }
 function JobSearch() {
@@ -37,6 +43,45 @@ function JobSearch() {
   );
 }
 
+function LatestJob() {
+ 
+  return (
+    <>
+
+        <div className="py-20">
+      <div className="container mx-auto text-center">
+       <div className="p-8 #faf5ff shadow-lg rounded-lg"> 
+        <h2 className="text-4xl font-bold mb-12"><span className="text-[#dc2626]">Latest & Top</span> <span>Job Opportunity</span></h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <div className="p-8 bg-white shadow-lg rounded-lg">
+          <h4 className="text-xl font-semibold mt-4">-Company Name</h4>
+            <p>India</p>
+            <h4 className="text-xl font-semibold mt-4">-Job Title</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, magnam.</p>
+          </div>
+          <div className="p-8 bg-white shadow-lg rounded-lg">
+            <p>"Waiting For The Feedback"</p>
+            <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
+          </div>
+          <div className="p-8 bg-white shadow-lg rounded-lg">
+            <p>"Waiting For The Feedback"</p>
+            <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
+          </div>
+          <div className="p-8 bg-white shadow-lg rounded-lg">
+            <p>"Waiting For The Feedback"</p>
+            <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
+          </div>
+
+        </div>
+        </div>
+      </div>
+    </div>
+    </>
+     
+    
+  );
+}
 
 function Features() {
   return (
@@ -96,7 +141,9 @@ function HomePage() {
   return (
     <div>
       <HeroSection />
+      <CategoryCarousel/>
       <JobSearch />
+      <LatestJob/>
       <Features />
       <Testimonials />
       <Footer />
