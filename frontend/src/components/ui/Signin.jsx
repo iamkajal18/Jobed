@@ -325,17 +325,7 @@ const Signin = () => {
             </RadioGroup>
           </div>
 
-          {/* Profile Picture Upload */}
-          <div className="flex flex-col items-start space-y-3 mx-2 my-4">
-            <label className="block text-sm font-medium text-gray-700">Profile</label>
-            <input
-              type="file"
-              accept="image/*"
-              className="block w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
-            />
-          </div>
-
-          {/* Submit Button */}
+   {/* Submit Button */}
           {loading ? (
             <Button
               type="button"

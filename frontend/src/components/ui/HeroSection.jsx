@@ -1,21 +1,21 @@
 import CategoryCarousel from "./CategoryCarousel";
-
+import Navbar from "./Navbar";
 function HeroSection() {
   return (
-    
     <div className="bg-blue-500 text-white py-20 sm:py-16 md:py-24">
-    <div className="container mx-auto text-center px-4">
-      <h1 className="text-4xl font-bold mb-4 sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
-        Find Your Dream Job
-      </h1>
-      <p className="text-lg mb-8 sm:text-base md:text-lg lg:text-xl">
-        Join the No.1 Job Hunt Website and discover thousands of opportunities.
-      </p>
-      <button className="bg-white text-blue-500 px-6 py-3 rounded-full font-semibold text-lg hover:bg-gray-200 transition">
-        Get Started
-      </button>
+      <div className="container mx-auto text-center px-4">
+        <h1 className="text-4xl font-bold mb-4 sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
+          Find Your Dream Job
+        </h1>
+        <p className="text-lg mb-8 sm:text-base md:text-lg lg:text-xl">
+          Join the No.1 Job Hunt Website and discover thousands of
+          opportunities.
+        </p>
+        <button className="bg-white text-blue-500 px-6 py-3 rounded-full font-semibold text-lg hover:bg-gray-200 transition">
+          Get Started
+        </button>
+      </div>
     </div>
-  </div>
   );
 }
 function JobSearch() {
@@ -44,42 +44,42 @@ function JobSearch() {
 }
 
 function LatestJob() {
- 
   return (
     <>
-
-        <div className="py-20">
-      <div className="container mx-auto text-center">
-       <div className="p-8 #faf5ff shadow-lg rounded-lg"> 
-        <h2 className="text-4xl font-bold mb-12"><span className="text-[#dc2626]">Latest & Top</span> <span>Job Opportunity</span></h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          <div className="p-8 bg-white shadow-lg rounded-lg">
-          <h4 className="text-xl font-semibold mt-4">-Company Name</h4>
-            <p>India</p>
-            <h4 className="text-xl font-semibold mt-4">-Job Title</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, magnam.</p>
+      <div className="py-20">
+        <div className="container mx-auto text-center">
+          <div className="p-8 #faf5ff shadow-lg rounded-lg">
+            <h2 className="text-4xl font-bold mb-12">
+              <span className="text-[#dc2626]">Latest & Top</span>{" "}
+              <span>Job Opportunity</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-8 bg-white shadow-lg rounded-lg">
+                <h4 className="text-xl font-semibold mt-4">-Company Name</h4>
+                <p>India</p>
+                <h4 className="text-xl font-semibold mt-4">-Job Title</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Obcaecati, magnam.
+                </p>
+              </div>
+              <div className="p-8 bg-white shadow-lg rounded-lg">
+                <p>"Waiting For The Feedback"</p>
+                <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
+              </div>
+              <div className="p-8 bg-white shadow-lg rounded-lg">
+                <p>"Waiting For The Feedback"</p>
+                <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
+              </div>
+              <div className="p-8 bg-white shadow-lg rounded-lg">
+                <p>"Waiting For The Feedback"</p>
+                <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
+              </div>
+            </div>
           </div>
-          <div className="p-8 bg-white shadow-lg rounded-lg">
-            <p>"Waiting For The Feedback"</p>
-            <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
-          </div>
-          <div className="p-8 bg-white shadow-lg rounded-lg">
-            <p>"Waiting For The Feedback"</p>
-            <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
-          </div>
-          <div className="p-8 bg-white shadow-lg rounded-lg">
-            <p>"Waiting For The Feedback"</p>
-            <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
-          </div>
-
-        </div>
         </div>
       </div>
-    </div>
     </>
-     
-    
   );
 }
 
@@ -91,15 +91,26 @@ function Features() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="p-8 bg-white shadow-lg rounded-lg">
             <h3 className="text-2xl font-semibold mb-4">Verified Jobs</h3>
-            <p>All jobs posted on our site are verified by industry professionals.</p>
+            <p>
+              All jobs posted on our site are verified by industry
+              professionals.
+            </p>
           </div>
           <div className="p-8 bg-white shadow-lg rounded-lg">
-            <h3 className="text-2xl font-semibold mb-4">User-Friendly Interface</h3>
-            <p>We offer a simple and intuitive platform for job seekers and recruiters.</p>
+            <h3 className="text-2xl font-semibold mb-4">
+              User-Friendly Interface
+            </h3>
+            <p>
+              We offer a simple and intuitive platform for job seekers and
+              recruiters.
+            </p>
           </div>
           <div className="p-8 bg-white shadow-lg rounded-lg">
             <h3 className="text-2xl font-semibold mb-4">Career Advice</h3>
-            <p>Our blog and resource center provides expert career advice and tips.</p>
+            <p>
+              Our blog and resource center provides expert career advice and
+              tips.
+            </p>
           </div>
         </div>
       </div>
@@ -128,9 +139,15 @@ function Footer() {
     <footer className="bg-gray-800 text-white py-10">
       <div className="container mx-auto text-center">
         <p>&copy; 2024 Job Hunt Website. All Rights Reserved.</p>
-        <p className="mt-2">Follow us on:
-          <a href="#" className="ml-2 text-blue-400">Twitter</a> |
-          <a href="#" className="ml-2 text-blue-400">LinkedIn</a>
+        <p className="mt-2">
+          Follow us on:
+          <a href="#" className="ml-2 text-blue-400">
+            Twitter
+          </a>{" "}
+          |
+          <a href="#" className="ml-2 text-blue-400">
+            LinkedIn
+          </a>
         </p>
       </div>
     </footer>
@@ -140,10 +157,11 @@ function Footer() {
 function HomePage() {
   return (
     <div>
+      <Navbar />
       <HeroSection />
-      <CategoryCarousel/>
+      <CategoryCarousel />
       <JobSearch />
-      <LatestJob/>
+      <LatestJob />
       <Features />
       <Testimonials />
       <Footer />

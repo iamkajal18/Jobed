@@ -7,14 +7,13 @@ import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Browser from "./components/ui/Browser";
 import HeroSection from "./components/ui/HeroSection";
-import CategoryCarousel from "./components/ui/CategoryCarousel";
-import LatestJob from "./components/ui/LatestJob";
+
 
 function App() {
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <Navbar></Navbar>,
+      element: <HeroSection></HeroSection>,
     },
     {
       path: "/home",
@@ -42,10 +41,7 @@ function App() {
     <>
       <div>
         <RouterProvider router={appRouter} />
-        <HeroSection></HeroSection>
-        <CategoryCarousel></CategoryCarousel>
-        
-        
+
       </div>
     </>
   );
