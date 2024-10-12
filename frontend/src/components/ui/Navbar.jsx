@@ -4,13 +4,13 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 const navigation = [
   
   { name: "Login", href: "/sign-in", current: true },
-  { name: "HeroSection", href: "/", current: true },
- 
   { name: "SignUp", href: "/sign-up", current: true },
-  { name: "Team", href: "#", current: false },
+  { name: "HeroSection", href: "/", current: true },
+  { name: "Job", href: "/job", current: false },
   { name: "Projects", href: "#", current: false },
   { name: "Calendar", href: "#", current: false },
 ];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

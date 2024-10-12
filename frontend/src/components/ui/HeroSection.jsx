@@ -55,26 +55,115 @@ function LatestJob() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="p-8 bg-white shadow-lg rounded-lg">
-                <h4 className="text-xl font-semibold mt-4">-Company Name</h4>
+                <h4 className="text-xl font-semibold mt-4">Company Name</h4>
                 <p>India</p>
-                <h4 className="text-xl font-semibold mt-4">-Job Title</h4>
+                <h4 className="text-xl font-semibold mt-4">Job Title</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Obcaecati, magnam.
                 </p>
+                <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                  New
+                </span>
+                <span className="inline-block bg-blue-100 text-red-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                 Part Time
+                </span>
+                <span className="inline-block bg-blue-100 text-purple-800 text-sm font-medium  m-3 px-2 py-2 rounded-lg">
+                  24LPA
+                </span>
               </div>
               <div className="p-8 bg-white shadow-lg rounded-lg">
-                <p>"Waiting For The Feedback"</p>
-                <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
+                <h4 className="text-xl font-semibold mt-4">-Company Name</h4>
+                <p>India</p>
+                <h4 className="text-xl font-semibold mt-4">Job Title</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Obcaecati, magnam.
+                </p>
+                <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                  New
+                </span>
+                <span className="inline-block bg-blue-100 text-red-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                 Part Time
+                </span>
+                <span className="inline-block bg-blue-100 text-purple-800 text-sm font-medium  m-3 px-2 py-2 rounded-lg">
+                  24LPA
+                </span>
               </div>
               <div className="p-8 bg-white shadow-lg rounded-lg">
-                <p>"Waiting For The Feedback"</p>
-                <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
+                <h4 className="text-xl font-semibold mt-4">Company Name</h4>
+                <p>India</p>
+                <h4 className="text-xl font-semibold mt-4">Job Title</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Obcaecati, magnam.
+                </p>
+                <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                  New
+                </span>
+                <span className="inline-block bg-blue-100 text-red-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                 Part Time
+                </span>
+                <span className="inline-block bg-blue-100 text-purple-800 text-sm font-medium  m-3 px-2 py-2 rounded-lg">
+                  24LPA
+                </span>
               </div>
               <div className="p-8 bg-white shadow-lg rounded-lg">
-                <p>"Waiting For The Feedback"</p>
-                <h4 className="text-xl font-semibold mt-4">-Kajal Kasaudhan</h4>
+                <h4 className="text-xl font-semibold mt-4">Company Name</h4>
+                <p>India</p>
+                <h4 className="text-xl font-semibold mt-4">Job Title</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Obcaecati, magnam.
+                </p>
+                <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                  New
+                </span>
+                <span className="inline-block bg-blue-100 text-red-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                 Part Time
+                </span>
+                <span className="inline-block bg-blue-100 text-purple-800 text-sm font-medium  m-3 px-2 py-2 rounded-lg">
+                  24LPA
+                </span>
               </div>
+              <div className="p-8 bg-white shadow-lg rounded-lg">
+                <h4 className="text-xl font-semibold mt-4">Company Name</h4>
+                <p>India</p>
+                <h4 className="text-xl font-semibold mt-4">Job Title</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Obcaecati, magnam.
+                </p>
+                <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                  New
+                </span>
+                <span className="inline-block bg-blue-100 text-red-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                 Part Time
+                </span>
+                <span className="inline-block bg-blue-100 text-purple-800 text-sm font-medium  m-3 px-2 py-2 rounded-lg">
+                  24LPA
+                </span>
+              </div>
+              <div className="p-8 bg-white shadow-lg rounded-lg">
+                <h4 className="text-xl font-semibold mt-4">Company Name</h4>
+                <p>India</p>
+                <h4 className="text-xl font-semibold mt-4">Job Title</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Obcaecati, magnam.
+                </p>
+                <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                  New
+                </span>
+                <span className="inline-block bg-blue-100 text-red-800 text-sm font-medium m-2 px-3 py-2 rounded-lg">
+                 Part Time
+                </span>
+                <span className="inline-block bg-blue-100 text-purple-800 text-sm font-medium  m-3 px-2 py-2 rounded-lg">
+                  24LPA
+                </span>
+              </div>
+             
+              
             </div>
           </div>
         </div>
