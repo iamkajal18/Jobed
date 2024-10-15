@@ -230,11 +230,11 @@ function Footer() {
         <p>&copy; 2024 Job Hunt Website. All Rights Reserved.</p>
         <p className="mt-2">
           Follow us on:
-          <a href="#" className="ml-2 text-blue-400">
-            Twitter
+          <a href="https://github.com/iamkajal18" className="ml-2 text-blue-400">
+           GitHub
           </a>{" "}
           |
-          <a href="#" className="ml-2 text-blue-400">
+          <a href="https://www.linkedin.com/in/iamkajalkasaudhan/" className="ml-2 text-blue-400">
             LinkedIn
           </a>
         </p>
