@@ -3,12 +3,15 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 const navigation = [
   
-  { name: "Login", href: "/sign-in", current: true },
-  { name: "SignUp", href: "/sign-up", current: true },
-  { name: "HeroSection", href: "/", current: true },
+  
+  
+  { name: "Home", href: "/", current: false },
   { name: "Job", href: "/job", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "About", href: "/about-us", current: false },
+   { name: "Serives", href: "/services", current: false },
+   { name: "Contact", href: "/contact-us", current: false },
+
+  
 ];
 
 
@@ -114,6 +117,14 @@ export default function Navbar() {
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
                   >
                     Sign out
+                  </a>
+                </MenuItem>
+                <MenuItem>
+                  <a
+                    href="/sign-up"
+                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
+                  >
+                   Sign up
                   </a>
                 </MenuItem>
               </MenuItems>

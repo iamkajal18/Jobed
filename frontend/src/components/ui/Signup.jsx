@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import axios from "axios";
 
 const Signup = () => {
+  // State to manage form inputs and file
   const [input, setInput] = useState({
     fullname: "",
     email: "",
@@ -16,13 +17,16 @@ const Signup = () => {
     role: "",
     file: null,
   });
+  
   const [fileError, setFileError] = useState("");
   const navigate = useNavigate();
 
+  // Handler for input change
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
+  // Handler for file change
   const changeFileHandler = (e) => {
     const file = e.target.files?.[0];
     if (file && !["image/jpeg", "image/png", "image/jpg"].includes(file.type)) {
@@ -33,53 +37,70 @@ const Signup = () => {
       setInput({ ...input, file });
     }
   };
+
+  // Form submission handler
   const submitHandler = async (e) => {
     e.preventDefault();
-  
+
+    // Create form data to send the inputs and the file
+    const formData = new FormData();
+    formData.append("email", input.email);
+    formData.append("password", input.password);
+    formData.append("first_name", input.fullname);
+    formData.append("mobile_number", input.phoneNumber);
+    formData.append("type", "Student"); // Static type for now  
+    formData.append("username", "papa"); // Static username for now
+    console.log(formData);
+    if (input.file) {
+      formData.append("image", input.file); // Append the image file
+    }
+
     try {
-      const res = await axios.post(`${USER_API_END_POINT}/login`, {
-        email: input.email,
-        password: input.password,
-      }, {
-        withCredentials: true,
-      });
-  
+      const res = await axios.post(
+        "https://jobedinwebsite-production.up.railway.app/api/register",
+        formData, // Send formData including the image
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important for file upload
+          },
+          withCredentials: true, // If the API requires credentials (e.g., cookies)
+        }
+      );
+
       if (res.data.success) {
-        toast.success("Login successful!", {
+        toast.success("Signup successful!", {
           duration: 3000,
           position: "top-right",
         });
         setTimeout(() => {
-          navigate("/dashboard"); // Navigate after 2 seconds
+          navigate("/sign-in"); // Redirect after signup success
         }, 2000);
       } else {
-        toast.error(res.data.message || "Invalid credentials!", {
+        toast.error(res.data.message || "Signup failed!", {
           duration: 3000,
           position: "top-right",
         });
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Error during login, please try again.", {
+      console.error(error);
+      toast.error("Error during signup, please try again.", {
         duration: 3000,
         position: "top-right",
       });
     }
   };
-  
-  
+
   return (
     <div>
       <Navbar />
       <div className="flex items-center justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <form
           onSubmit={submitHandler}
-          className="w-full sm:w-2/3 md:w-1/2 lg:w-1/3 border border-gray-200 rounded-md p-6 shadow-md bg-white mt-10 mb-10" 
+          className="w-full sm:w-2/3 md:w-1/2 lg:w-1/3 border border-gray-200 rounded-md p-6 shadow-md bg-white mt-10 mb-10"
         >
           <h1 className="font-bold text-2xl mb-5 text-center">Sign Up</h1>
 
           <div className="my-4">
-            <label className="block text-sm font-medium text-gray-700"></label>
             <input
               type="text"
               value={input.fullname}
@@ -92,7 +113,6 @@ const Signup = () => {
           </div>
 
           <div className="my-4">
-            <label className="block text-sm font-medium text-gray-700"></label>
             <input
               type="email"
               value={input.email}
@@ -105,7 +125,6 @@ const Signup = () => {
           </div>
 
           <div className="my-4">
-            <label className="block text-sm font-medium text-gray-700"></label>
             <input
               type="text"
               value={input.phoneNumber}
@@ -118,7 +137,6 @@ const Signup = () => {
           </div>
 
           <div className="my-4">
-            <label className="block text-sm font-medium text-gray-700"></label>
             <input
               type="password"
               value={input.password}

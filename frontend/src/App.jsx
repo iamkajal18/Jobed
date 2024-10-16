@@ -5,8 +5,10 @@ import Signup from "./components/ui/Signup";
 import Signin from "./components/ui/Signin";
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Browser from "./components/ui/Browser";
 import HeroSection from "./components/ui/HeroSection";
+import AboutUs from "./components/ui/AboutUs";
+import Services from "./components/ui/Services";
+import ContactUs from "./components/ui/ContactUs";
 
 
 function App() {
@@ -32,16 +34,24 @@ function App() {
       element: <Signin />,
     },
     {
-      path: "/browser",
-      element: <Browser />,
+      path: "/about-us",
+      element: <AboutUs />,
+    },
+    {
+      path: "/services",
+      element: <Services />,
+    },
+    {
+      path: "/contact-us",
+      element: <ContactUs />,
     },
   ]);
 
   return (
     <>
       <div>
-        <RouterProvider router={appRouter} />
-
+      <RouterProvider router={appRouter} />
+      
       </div>
     </>
   );
