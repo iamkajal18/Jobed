@@ -145,16 +145,16 @@ const Signin = () => {
                     "https://jobedinwebsite-production.up.railway.app/api/accounts/google/login/")
                 }
               >
-                Login with Google
+               Google
               </Button>
               <Button
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
                 onClick={() =>
                   (window.location.href =
-                    "https://jobedinwebsite-production.up.railway.app/api/accounts/linkedin/login/")
+                    "https://jobedinwebsite-production.up.railway.app/api/accounts/github/login/")
                 }
               >
-                Login with LinkedIn
+               LinkedIn
               </Button>
             </div>
           </div>
