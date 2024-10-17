@@ -25,7 +25,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState("false");
+  const [isLoggedIn, setIsLoggedIn] = useState("");
   const [profilePhoto, setProfilePhoto] = useState("");
   const navigate = useNavigate();
 
@@ -42,6 +42,7 @@ export default function Navbar() {
       .get("https://jobedinwebsite-production.up.railway.app/api/check-login/")
       .then((response) => {
         if (response.data.is_logged_in) {
+          console.log(response.data);
           setIsLoggedIn(true);
 
           // If the user is logged in, fetch their profile photo
