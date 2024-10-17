@@ -15,7 +15,7 @@ const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [role, setRole] = useState("Student");
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
@@ -26,7 +26,7 @@ const Signin = () => {
         {
           username: username,
           password: password,
-          type: "Student",
+          type: role,
         }
       );
 
