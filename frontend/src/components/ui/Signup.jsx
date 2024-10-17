@@ -64,7 +64,7 @@ const Signup = () => {
           headers: {
             // enctype
             
-            "Content-Type": "application/json", // Important for file upload
+            "Content-Type": "multipart/form-data", // Important for file upload
           },
           withCredentials: true, // If the API requires credentials (e.g., cookies)
         }
