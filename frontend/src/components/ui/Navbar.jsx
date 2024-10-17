@@ -25,7 +25,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState("false");
   const [profilePhoto, setProfilePhoto] = useState("");
   const navigate = useNavigate();
 
