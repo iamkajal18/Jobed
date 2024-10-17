@@ -85,7 +85,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error(res.data.message, {
+      toast.error("Some thing is bugg", {
         duration: 3000,
         position: "top-right",
       });
