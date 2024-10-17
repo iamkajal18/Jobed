@@ -15,9 +15,10 @@ const Signup = () => {
     phoneNumber: "",
     password: "",
     role: "",
+    username: "",
     file: null,
   });
-  
+
   const [fileError, setFileError] = useState("");
   const navigate = useNavigate();
 
@@ -48,8 +49,8 @@ const Signup = () => {
     formData.append("password", input.password);
     formData.append("first_name", input.fullname);
     formData.append("mobile_number", input.phoneNumber);
-    formData.append("type", "Student"); // Static type for now  
-    formData.append("username", "papa"); // Static username for now
+    formData.append("type", input.role); // Static type for now
+    formData.append("username", input.username); // Static username for now
     console.log(formData);
     if (input.file) {
       formData.append("image", input.file); // Append the image file
@@ -61,6 +62,7 @@ const Signup = () => {
         formData, // Send formData including the image
         {
           headers: {
+            // enctype
             "Content-Type": "multipart/form-data", // Important for file upload
           },
           withCredentials: true, // If the API requires credentials (e.g., cookies)
@@ -111,6 +113,17 @@ const Signup = () => {
               required
             />
           </div>
+          <div className="my-4">
+            <input
+              type="text"
+              value={input.username}
+              name="username"
+              onChange={changeEventHandler}
+              placeholder="Username"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
+          </div>
 
           <div className="my-4">
             <input
@@ -149,7 +162,9 @@ const Signup = () => {
           </div>
 
           <div className="my-4">
-            <label className="block text-sm font-medium text-gray-700">Role</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Role
+            </label>
             <RadioGroup className="flex gap-4 mt-2">
               <div className="flex items-center space-x-2">
                 <input
@@ -177,23 +192,33 @@ const Signup = () => {
           </div>
 
           <div className="my-4">
-            <label className="block text-sm font-medium text-gray-700">Profile Picture</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Profile Picture
+            </label>
             <input
               accept="image/*"
               onChange={changeFileHandler}
               type="file"
               className="block w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
             />
-            {fileError && <p className="text-red-600 text-sm mt-2">{fileError}</p>}
+            {fileError && (
+              <p className="text-red-600 text-sm mt-2">{fileError}</p>
+            )}
           </div>
 
-          <Button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
+          <Button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700"
+          >
             Submit
           </Button>
 
           <p className="text-sm text-gray-500 mt-6 text-center">
             Already have an account?{" "}
-            <Link to="/sign-in" className="text-indigo-600 hover:text-indigo-500">
+            <Link
+              to="/sign-in"
+              className="text-indigo-600 hover:text-indigo-500"
+            >
               Login
             </Link>
           </p>
