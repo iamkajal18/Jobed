@@ -22,11 +22,11 @@ const Signin = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://127.0.0.1:8000/api/login/",
+        "https://jobedinwebsite-production.up.railway.app/api/login/",
         {
           username: username,
           password: password,
-          type: role,
+          type: "Student",
         }
       );
 
