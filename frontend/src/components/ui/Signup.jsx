@@ -52,9 +52,9 @@ const Signup = () => {
     formData.append("type", "Student"); // Static type for now
     formData.append("username", input.username); // Static username for now
     console.log(formData);
-    // if (input.file) {
-    //   formData.append("image", input.file); // Append the image file
-    // }
+    if (input.file) {
+      formData.append("image", input.file); // Append the image file
+    }
 
     try {
       const res = await axios.post(
@@ -62,8 +62,7 @@ const Signup = () => {
         formData, // Send formData including the image
         {
           headers: {
-            // enctype
-            
+
             "Content-Type": "application/json", // Important for file upload
           },
           withCredentials: true, // If the API requires credentials (e.g., cookies)
