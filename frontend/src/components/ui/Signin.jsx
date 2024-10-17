@@ -29,7 +29,7 @@ const Signin = () => {
           type: role,
         }
       );
-
+      console.log(res);
       if (res.status == 200) {
         console.log("Login successful:", res.data);
         // Handle successful login (e.g., update UI, store user info)
