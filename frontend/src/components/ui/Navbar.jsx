@@ -38,7 +38,7 @@ export default function Navbar() {
     localStorage.removeItem("user");
     localStorage.removeItem("refresh");
     setIsLoggedIn(false);
-    navigate("/login");
+    navigate("/sign-in");
   };
 
   return (
