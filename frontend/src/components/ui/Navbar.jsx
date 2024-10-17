@@ -10,6 +10,7 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -29,41 +30,54 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-   
-    fetch("https://jobedinwebsite-production.up.railway.app/api/check-login/", {
-      method: "GET",
-      credentials: "include", 
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.is_logged_in) {
+    // Set up axios with credentials and CSRF token handling
+    axios.defaults.withCredentials = true;
+
+    // CSRF setup (ensure your backend is sending the CSRF token in a cookie)
+    axios.defaults.xsrfCookieName = 'csrftoken';
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+    // Check if the user is logged in
+    axios
+      .get("https://jobedinwebsite-production.up.railway.app/api/check-login/")
+      .then((response) => {
+        if (response.data.is_logged_in) {
           setIsLoggedIn(true);
 
-          fetch("https://jobedinwebsite-production.up.railway.app/api/user-profile/", {
-            method: "GET",
-            credentials: "include", 
-          })
-            .then((response) => response.json())
-            .then((profileData) => {
-              setProfilePhoto(profileData.profile_photo || "download.jpg"); 
-            })
-            .catch((error) => {
-              console.error("Error fetching user profile:", error);
-            });
+          // If the user is logged in, fetch their profile photo
+          return axios.get(
+            "https://jobedinwebsite-production.up.railway.app/api/user-profile/"
+          );
+        }
+        return null;
+      })
+      .then((profileResponse) => {
+        if (profileResponse) {
+          setProfilePhoto(profileResponse.data.profile_photo || "download.jpg");
         }
       })
       .catch((error) => {
-        console.error("Error checking login status:", error);
+        console.error("Error:", error);
       });
   }, []);
-  
+
+  const handleLogout = () => {
+    axios
+      .post("https://jobedinwebsite-production.up.railway.app/api/logout/", {})
+      .then(() => {
+        setIsLoggedIn(false);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error);
+      });
+  };
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button */}
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
               <Bars3Icon
                 aria-hidden="true"
