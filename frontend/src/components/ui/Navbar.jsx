@@ -29,24 +29,34 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in by checking the token
-    const token = localStorage.getItem("access_token");
-    const photo = localStorage.getItem("profile_photo");
+   
+    fetch("https://jobedinwebsite-production.up.railway.app/api/check-login/", {
+      method: "GET",
+      credentials: "include", 
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.is_logged_in) {
+          setIsLoggedIn(true);
 
-    if (token) {
-      setIsLoggedIn(true);
-      setProfilePhoto(photo || "download.jpg"); // Set a default profile photo if none is provided
-    }
+          fetch("https://jobedinwebsite-production.up.railway.app/api/user-profile/", {
+            method: "GET",
+            credentials: "include", 
+          })
+            .then((response) => response.json())
+            .then((profileData) => {
+              setProfilePhoto(profileData.profile_photo || "download.jpg"); 
+            })
+            .catch((error) => {
+              console.error("Error fetching user profile:", error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error("Error checking login status:", error);
+      });
   }, []);
-
-  const handleLogout = () => {
-    // Clear tokens and profile information on logout
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    localStorage.removeItem("profile_photo");
-    setIsLoggedIn(false);
-    navigate("/login");
-  };
+  
 
   return (
     <Disclosure as="nav" className="bg-gray-800">

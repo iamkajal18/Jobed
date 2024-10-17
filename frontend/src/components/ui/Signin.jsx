@@ -15,7 +15,7 @@ const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [role, setRole] = useState("Student");
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
@@ -29,14 +29,14 @@ const Signin = () => {
           type: role,
         }
       );
-
-      if (res.status === 200) {
+      console.log(res);
+      if (res.status == 200) {
         console.log("Login successful:", res.data);
         // Handle successful login (e.g., update UI, store user info)
         navigate("/");
       }
     } catch (error) {
-      console.error("Login failed");
+      console.error("Login failed",res.error);
     }
   };
 
@@ -142,19 +142,19 @@ const Signin = () => {
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
                 onClick={() =>
                   (window.location.href =
-                    "https://jobedinwebsite-production.up.railway.app/api/accounts/google/login/")
+                    "https://jobedinwebsite-production.up.railway.app/accounts/google/login/")
                 }
               >
-                Login with Google
+               Google
               </Button>
               <Button
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
                 onClick={() =>
                   (window.location.href =
-                    "https://jobedinwebsite-production.up.railway.app/api/accounts/linkedin/login/")
+                    "https://jobedinwebsite-production.up.railway.app/accounts/github/login/")
                 }
               >
-                Login with LinkedIn
+               Github
               </Button>
             </div>
           </div>

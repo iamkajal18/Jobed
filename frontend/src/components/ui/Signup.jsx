@@ -63,7 +63,7 @@ const Signup = () => {
         {
           headers: {
             // enctype
-            
+
             "Content-Type": "multipart/form-data", // Important for file upload
           },
           withCredentials: true, // If the API requires credentials (e.g., cookies)
@@ -71,7 +71,7 @@ const Signup = () => {
       );
       console.log(res.data);
       if (res.data.success) {
-        toast.success (res.data.message || "Signup successful!",  {
+        toast.success(res.data.message || "Signup successful!", {
           duration: 3000,
           position: "top-right",
         });
@@ -86,7 +86,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Error during signup, please try again.", {
+      toast.error(res.data.message, {
         duration: 3000,
         position: "top-right",
       });
@@ -104,6 +104,9 @@ const Signup = () => {
           <h1 className="font-bold text-2xl mb-5 text-center">Sign Up</h1>
 
           <div className="my-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Full Name
+            </label>
             <input
               type="text"
               value={input.fullname}
@@ -115,6 +118,10 @@ const Signup = () => {
             />
           </div>
           <div className="my-4">
+            <label className="block text-sm font-medium text-gray-700">
+              UserName
+            </label>
+
             <input
               type="text"
               value={input.username}
@@ -127,6 +134,10 @@ const Signup = () => {
           </div>
 
           <div className="my-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
+
             <input
               type="email"
               value={input.email}
@@ -139,6 +150,10 @@ const Signup = () => {
           </div>
 
           <div className="my-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Mobile Number
+            </label>
+
             <input
               type="text"
               value={input.phoneNumber}
@@ -151,6 +166,9 @@ const Signup = () => {
           </div>
 
           <div className="my-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               value={input.password}
