@@ -5,11 +5,12 @@ import { Label } from "@radix-ui/react-label";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Signin = () => {
-    const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [role, setRole] = useState("");
@@ -19,50 +20,29 @@ const Signin = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/login/",
+        "https://127.0.0.1:8000/api/login/",
         {
           username: username,
           password: password,
-         
+          type:role
         }
       );
-
       console.log(res.data.success);
-      if (res.data.success) {
-        console.log("Login successful", res.data);
-        
-        // Storing tokens and user info in localStorage
+      if (res.data.success){
+        console.log("Login successful",res.data);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("refresh", res.data.refresh);
-
-        // Show success toast
-        toast.success(res.data.message || "Signin successful!", {
-          duration: 3000,
-          position: "top-right",
-        });
-
-        // Navigate to the homepage or another route
         navigate("/");
-      } else {
-        // Handle API errors (in case success is false)
-        setError(res.data.message || "Login failed");
-        toast.error(res.data.message || "Login failed", {
-          duration: 3000,
-          position: "top-right",
-        });
+      }
+      else{
+        console.log("Login failed",res.data);
+        toast.error("Invalid credentials");
       }
     } catch (error) {
-      // Log error to console
-      console.error("Login failed", error);
-
-      // Show error to user
-      setError(error.response?.data?.message || "An error occurred. Please try again.");
-      toast.error(error.response?.data?.message || "An error occurred", {
-        duration: 3000,
-        position: "top-right",
-      });
+      console.error("Login failed",error);
     }
+
   };
 
   return (

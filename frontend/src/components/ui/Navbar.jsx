@@ -23,12 +23,12 @@ export default function Navbar() {
   useEffect(() => {
     // Check if token and user info are in localStorage
     const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = localStorage.getItem("user");
 
     if (token && user) {
       setIsLoggedIn(true);
       // Set profile photo if available in localStorage, otherwise use default
-      setProfilePhoto(user.profile_photo || "download.jpg");
+      setProfilePhoto(user.image || "download.jpg");
     }
   }, []);
 
