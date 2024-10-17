@@ -39,7 +39,7 @@ export default function Navbar() {
           const profileResponse = await axios.get(
             "https://jobedinwebsite-production.up.railway.app/api/user-profile/"
           );
-          setProfilePhoto(profileResponse.data.profile_photo || "default_profile.jpg");
+          setProfilePhoto(profileResponse.data.profile_photo || "download.jpg");
         }
       } catch (error) {
         console.error("Error during login check:", error);
