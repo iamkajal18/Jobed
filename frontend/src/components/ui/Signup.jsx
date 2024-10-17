@@ -52,9 +52,9 @@ const Signup = () => {
     formData.append("type", "Student"); // Static type for now
     formData.append("username", input.username); // Static username for now
     console.log(formData);
-    // if (input.file) {
-    //   formData.append("image", input.file); // Append the image file
-    // }
+    if (input.file) {
+      formData.append("image", input.file); // Append the image file
+    }
 
     try {
       const res = await axios.post(
