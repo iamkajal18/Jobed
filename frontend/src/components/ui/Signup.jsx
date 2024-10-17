@@ -74,9 +74,7 @@ const Signup = () => {
           duration: 3000,
           position: "top-right",
         });
-        setTimeout(() => {
-          navigate("/sign-in"); // Redirect after signup success
-        }, 2000);
+        navigate("/sign-in");
       } else {
         toast.error(res.data.message || "Signup failed!", {
           duration: 3000,
