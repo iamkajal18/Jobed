@@ -58,7 +58,7 @@ const Signup = () => {
 
     try {
       const res = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/register",
+        "https://jobedinwebsite-production.up.railway.app/api/register/",
         formData, // Send formData including the image
         {
           headers: {
@@ -71,7 +71,7 @@ const Signup = () => {
       );
 
       if (res.data.success) {
-        toast.success("Signup successful!", {
+        toast.success (res.data.message || "Signup successful!",  {
           duration: 3000,
           position: "top-right",
         });
