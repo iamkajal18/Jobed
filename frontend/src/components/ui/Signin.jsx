@@ -142,7 +142,7 @@ const Signin = () => {
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
                 onClick={() =>
                   (window.location.href =
-                    "http://localhost:8000/accounts/google/login/")
+                    "https://jobedinwebsite-production.up.railway.app/api/accounts/google/login/")
                 }
               >
                 Login with Google
@@ -151,7 +151,7 @@ const Signin = () => {
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
                 onClick={() =>
                   (window.location.href =
-                    "http://localhost:8000/accounts/linkedin/login/")
+                    "https://jobedinwebsite-production.up.railway.app/api/accounts/linkedin/login/")
                 }
               >
                 Login with LinkedIn

@@ -46,7 +46,7 @@ function JobSearch() {
 function LatestJob() {
   return (
     <>
-      <div className="py-20">
+      <div className="py-1">
         <div className="container mx-auto text-center">
           <div className="p-8 #faf5ff shadow-lg rounded-lg">
             <h2 className="text-4xl font-bold mb-12">
