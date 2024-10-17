@@ -69,7 +69,7 @@ const Signup = () => {
           withCredentials: true, // If the API requires credentials (e.g., cookies)
         }
       );
-
+      console.log(res.data);
       if (res.data.success) {
         toast.success (res.data.message || "Signup successful!",  {
           duration: 3000,
