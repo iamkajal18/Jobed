@@ -36,7 +36,7 @@ const Signin = () => {
         navigate("/");
       }
     } catch (error) {
-      console.error("Login failed",res.error);
+      console.error("Login failed",error);
     }
   };
 
