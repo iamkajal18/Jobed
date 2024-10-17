@@ -8,8 +8,7 @@ function Job() {
       <Navbar />
       <main className="p-4">
         <JobList /> {/* Include JobList component */}
-        <JobList />
-        <JobList />
+       
       </main>
     </div>
   );
