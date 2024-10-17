@@ -5,9 +5,6 @@ import { Label } from "@radix-ui/react-label";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "@/redux/authSlice";
-import { Loader2 } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -29,14 +26,42 @@ const Signin = () => {
           type: role,
         }
       );
-      console.log(res);
-      if (res.status == 200) {
-        console.log("Login successful:", res.data);
-        // Handle successful login (e.g., update UI, store user info)
+
+      if (res.data.success) {
+        console.log("Login successful", res.data);
+        
+        // Storing tokens and user info in localStorage
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("role", res.data.user.role);
+        localStorage.setItem("refresh", res.data.refresh);
+
+        // Show success toast
+        toast.success(res.data.message || "Signin successful!", {
+          duration: 3000,
+          position: "top-right",
+        });
+
+        // Navigate to the homepage or another route
         navigate("/");
+      } else {
+        // Handle API errors (in case success is false)
+        setError(res.data.message || "Login failed");
+        toast.error(res.data.message || "Login failed", {
+          duration: 3000,
+          position: "top-right",
+        });
       }
     } catch (error) {
-      console.error("Login failed",error);
+      // Log error to console
+      console.error("Login failed", error);
+
+      // Show error to user
+      setError(error.response?.data?.message || "An error occurred. Please try again.");
+      toast.error(error.response?.data?.message || "An error occurred", {
+        duration: 3000,
+        position: "top-right",
+      });
     }
   };
 
@@ -52,7 +77,6 @@ const Signin = () => {
             Sign In
           </h1>
 
-          {/* Username Field */}
           <div>
             <label
               htmlFor="username"
