@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from "@headlessui/react";
+import { Disclosure, Menu } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios
+import axios from "axios";
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -25,86 +17,75 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState("");
-  const [profilePhoto, setProfilePhoto] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profilePhoto, setProfilePhoto] = useState("default_profile.jpg"); // Fallback profile photo
   const navigate = useNavigate();
 
   useEffect(() => {
     // Set up axios with credentials and CSRF token handling
     axios.defaults.withCredentials = true;
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-    // CSRF setup (ensure your backend is sending the CSRF token in a cookie)
-    axios.defaults.xsrfCookieName = 'csrftoken';
-    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
-    // Check if the user is logged in
-    axios
-      .get("https://jobedinwebsite-production.up.railway.app/api/check-login/")
-      .then((response) => {
-        if (response.data.is_logged_in) {
-          console.log(response.data);
+    // Check if the user is logged in and fetch their profile
+    const checkLogin = async () => {
+      try {
+        const loginResponse = await axios.get(
+          "https://jobedinwebsite-production.up.railway.app/api/check-login/"
+        );
+        if (loginResponse.data.is_logged_in) {
           setIsLoggedIn(true);
 
-          // If the user is logged in, fetch their profile photo
-          return axios.get(
+          const profileResponse = await axios.get(
             "https://jobedinwebsite-production.up.railway.app/api/user-profile/"
           );
+          setProfilePhoto(profileResponse.data.profile_photo || "default_profile.jpg");
         }
-        return null;
-      })
-      .then((profileResponse) => {
-        if (profileResponse) {
-          setProfilePhoto(profileResponse.data.profile_photo || "download.jpg");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      } catch (error) {
+        console.error("Error during login check:", error);
+      }
+    };
+
+    checkLogin();
   }, []);
 
-  const handleLogout = () => {
-    axios
-      .post("https://jobedinwebsite-production.up.railway.app/api/logout/", {})
-      .then(() => {
-        setIsLoggedIn(false);
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.error("Error logging out:", error);
-      });
+  const handleLogout = async () => {
+    try {
+      await axios.post("https://jobedinwebsite-production.up.railway.app/api/logout/");
+      setIsLoggedIn(false);
+      navigate("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
+          {/* Mobile menu button */}
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-              <Bars3Icon
-                aria-hidden="true"
-                className="block h-6 w-6 group-data-[open]:hidden"
-              />
-              <XMarkIcon
-                aria-hidden="true"
-                className="hidden h-6 w-6 group-data-[open]:block"
-              />
-            </DisclosureButton>
+            <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none">
+              <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+              <XMarkIcon className="hidden h-6 w-6" aria-hidden="true" />
+            </Disclosure.Button>
           </div>
+
+          {/* Logo and Navigation */}
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <img
-                alt="Your Company"
-                src="Jobedin.jpg"
                 className="h-8 w-auto rounded-lg"
+                src="/Jobedin.jpg"
+                alt="Your Company"
               />
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? "page" : undefined}
+                    to={item.href}
                     className={classNames(
                       item.current
                         ? "bg-gray-900 text-white"
@@ -113,59 +94,73 @@ export default function Navbar() {
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
           </div>
+
+          {/* Profile Section */}
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button
               type="button"
-              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none"
             >
               <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="h-6 w-6" />
+              <BellIcon className="h-6 w-6" aria-hidden="true" />
             </button>
 
-            {/* Profile dropdown */}
+            {/* Profile Dropdown */}
             {isLoggedIn ? (
               <Menu as="div" className="relative ml-3">
-                <div>
-                  <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                    <img
-                      alt="Profile"
-                      src={profilePhoto}
-                      className="h-8 w-8 rounded-full"
-                    />
-                  </MenuButton>
-                </div>
-                <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none">
-                  <MenuItem>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Your Profile
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Settings
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a
-                      href="#"
-                      onClick={handleLogout}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Sign out
-                    </a>
-                  </MenuItem>
-                </MenuItems>
+                <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none">
+                  <img
+                    className="h-8 w-8 rounded-full"
+                    src={profilePhoto}
+                    alt="Profile"
+                  />
+                </Menu.Button>
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        to="/profile"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Your Profile
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        to="/settings"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Settings
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleLogout}
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block w-full text-left px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Sign out
+                      </button>
+                    )}
+                  </Menu.Item>
+                </Menu.Items>
               </Menu>
             ) : (
               <Link
@@ -179,15 +174,13 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <DisclosurePanel className="sm:hidden">
+      {/* Mobile Menu Panel */}
+      <Disclosure.Panel className="sm:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2">
           {navigation.map((item) => (
-            <DisclosureButton
+            <Link
               key={item.name}
-              as="a"
-              href={item.href}
-              aria-current={item.current ? "page" : undefined}
+              to={item.href}
               className={classNames(
                 item.current
                   ? "bg-gray-900 text-white"
@@ -196,10 +189,10 @@ export default function Navbar() {
               )}
             >
               {item.name}
-            </DisclosureButton>
+            </Link>
           ))}
         </div>
-      </DisclosurePanel>
+      </Disclosure.Panel>
     </Disclosure>
   );
 }
