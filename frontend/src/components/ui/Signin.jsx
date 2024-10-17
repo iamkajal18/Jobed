@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Signin = () => {
-  const [username, setUsername] = useState("");
+    const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [role, setRole] = useState("");
@@ -23,17 +23,17 @@ const Signin = () => {
         {
           username: username,
           password: password,
-          type: role,
+         
         }
       );
 
+      console.log(res.data.success);
       if (res.data.success) {
         console.log("Login successful", res.data);
         
         // Storing tokens and user info in localStorage
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        localStorage.setItem("role", res.data.user.role);
         localStorage.setItem("refresh", res.data.refresh);
 
         // Show success toast
