@@ -58,7 +58,7 @@ const Signup = () => {
 
     try {
       const res = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/register/",
+        "https://127.0.0.1:8000/api/register/",
         formData, // Send formData including the image
         {
           headers: {

@@ -19,10 +19,13 @@ const Signin = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      console.log(username);
+      console.log(password);
       const res = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/login/",
+        "https://127.0.0.1:8000/api/login/",
         {
           username: username,
+          
           password: password,
           type:role
         }
@@ -32,6 +35,7 @@ const Signin = () => {
         console.log("Login successful",res.data);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
+        console.log(res.data.user.image);
         localStorage.setItem("refresh", res.data.refresh);
         navigate("/");
       }

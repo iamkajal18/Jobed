@@ -4,7 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 
 const navigation = [
-  { name: "Home", href: "/", current: false },
+  // { name: "Home", href: "/", current: false },
   { name: "Job", href: "/job", current: false },
   { name: "About", href: "/about-us", current: false },
   { name: "Services", href: "/services", current: false },
@@ -17,23 +17,27 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [profilePhoto, setProfilePhoto] = useState("download.jpg"); // Default fallback profile photo
+  const [profilePhoto, setProfilePhoto] = useState("download.jpg");
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if token and user info are in localStorage
+
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-
+    
     if (token && user) {
       setIsLoggedIn(true);
-      // Set profile photo if available in localStorage, otherwise use default
-      setProfilePhoto(user.image || "download.jpg");
+  
+      let image=user.slice(user.search("image/upload/")+13,user.search("jpg")+3);
+      setProfilePhoto(image|| "download.jpg");
+
+      // image=user.search("image/upload/");
+      // jpg = user.search("jpg");
+
     }
   }, []);
 
   const handleLogout = () => {
-    // Clear token and user info from localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("refresh");
@@ -55,14 +59,17 @@ export default function Navbar() {
                 </Disclosure.Button>
               </div>
 
-              {/* Logo and Navigation */}
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
+                <Link to="/" >
+                <img
                     className="h-8 w-auto rounded-lg"
                     src="/Jobedin.jpg"
                     alt="Your Company"
+                    loading="lazy"
                   />
+                </Link>
+                  
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -93,8 +100,6 @@ export default function Navbar() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-
-                {/* Profile Dropdown */}
                 {isLoggedIn ? (
                   <Menu as="div" className="relative ml-3">
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none">
@@ -166,7 +171,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Menu Panel */}
+
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
