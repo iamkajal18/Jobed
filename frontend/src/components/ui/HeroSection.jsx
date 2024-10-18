@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 function HeroSection() {
   return (
-    <div className="bg-gray-800 text-white py-20 sm:py-16 md:py-24">
+    <div className="bg-gray-500 text-white py-20 sm:py-16 md:py-24">
       <div className="container mx-auto text-center px-4">
         <h1 className="text-4xl font-bold mb-4 sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
           Find Your Dream Job
