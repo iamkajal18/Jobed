@@ -9,7 +9,7 @@ import HeroSection from "./components/ui/HeroSection";
 import AboutUs from "./components/ui/AboutUs";
 import Services from "./components/ui/Services";
 import ContactUs from "./components/ui/ContactUs";
-
+import Profile from "./components/ui/Profile";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -24,6 +24,10 @@ function App() {
     {
       path: "/job",
       element: <Job />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
     },
     {
       path: "/sign-up",
@@ -50,8 +54,7 @@ function App() {
   return (
     <>
       <div>
-      <RouterProvider router={appRouter} />
-      
+        <RouterProvider router={appRouter} />
       </div>
     </>
   );
