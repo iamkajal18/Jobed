@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { Label } from "@radix-ui/react-label";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { toast, ToastContainer } from "react-toastify";
@@ -36,8 +36,9 @@ const Signin = () => {
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("image", res.data.user.image);
         localStorage.setItem("refresh", res.data.refresh);
-        if (res.data.user.type=="Recruiter"){
-          navigate("")
+        console.log(res.data.user.type);
+        if (res.data.user.type==="Recruiter"){
+          window.location.href = "https://jobedinwebsite-production.up.railway.app/admin/";
         }
         navigate("/");
       }

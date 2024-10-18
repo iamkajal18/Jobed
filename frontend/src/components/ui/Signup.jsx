@@ -57,10 +57,10 @@ const Signup = () => {
     if (input.file) {
       formData.append("image", input.file);
     }
-    
+  
     try {
       const res = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/register/",
+        "https://127.0.0.1:8000/api/register/",
 
         formData, 
         {
