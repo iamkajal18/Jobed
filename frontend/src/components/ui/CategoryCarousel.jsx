@@ -55,7 +55,7 @@ function CategoryCarousel() {
 
         <CarouselContent className="flex space-x-4"> {/* Space between items */}
           {categories.map((category, index) => (
-            <CarouselItem key={index} className="md:basis-1/10 lg:basis-1/3 bg-slate-800 text-2xl">
+            <CarouselItem key={index} className=" sm:basis-1/12 md:basis-1/10 lg:basis-1/3 bg-slate-800 text-2xl">
               <div className="p-1">
                 <Card>
                   <CardContent className="flex aspect-square items-center justify-center p-6 text-center">
