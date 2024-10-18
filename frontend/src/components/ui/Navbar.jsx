@@ -30,8 +30,6 @@ export default function Navbar() {
       setIsLoggedIn(true);
        
       let image=user.image.slice(13, user.image.length);
-
-      
       setProfilePhoto(image|| "download.jpg");
 
       // image=user.search("image/upload/");
