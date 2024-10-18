@@ -49,17 +49,18 @@ const Signup = () => {
     formData.append("password", input.password);
     formData.append("first_name", input.fullname);
     formData.append("mobile_number", input.phoneNumber);
-    formData.append("type", "Student"); // Static type for now
-    formData.append("username", input.username); // Static username for now
+    formData.append("type", input.role); 
+    formData.append("username", input.username);
     console.log(formData);
     if (input.file) {
-      formData.append("image", input.file); // Append the image file
+      formData.append("image", input.file);
     }
 
     try {
       const res = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/register/",
-        formData, // Send formData including the image
+        "https://127.0.0.1:8000/api/register/",
+
+        formData, 
         {
           headers: {
 
@@ -83,7 +84,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Some thing is bugg", {
+      toast.error("Please try again later", {
         duration: 3000,
         position: "top-right",
       });
@@ -181,30 +182,31 @@ const Signup = () => {
             <label className="block text-sm font-medium text-gray-700">
               Role
             </label>
-            <RadioGroup className="flex gap-4 mt-2">
-              <div className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  name="role"
-                  value="student"
-                  checked={input.role === "student"}
-                  onChange={changeEventHandler}
-                  className="cursor-pointer w-4 h-4"
-                />
-                <Label>Student</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  name="role"
-                  value="recruiter"
-                  checked={input.role === "recruiter"}
-                  onChange={changeEventHandler}
-                  className="cursor-pointer w-4 h-4"
-                />
-                <Label>Recruiter</Label>
-              </div>
-            </RadioGroup>
+            <RadioGroup
+  value={input.role} // Bind the selected role from the state
+  onValueChange={(value) => setInput({ ...input, role: value })} // Update the role in the state when changed
+  className="flex gap-4 mt-2"
+>
+  <div className="flex items-center space-x-2">
+    <input
+      type="radio"
+      name="role"
+      value="student"
+      className="cursor-pointer w-4 h-4"
+    />
+    <Label>Student</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <input
+      type="radio"
+      name="role"
+      value="recruiter"
+      className="cursor-pointer w-4 h-4"
+    />
+    <Label>Recruiter</Label>
+  </div>
+</RadioGroup>
+
           </div>
 
           <div className="my-4">
