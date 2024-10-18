@@ -51,11 +51,13 @@ const Signup = () => {
     formData.append("mobile_number", input.phoneNumber);
     formData.append("type", input.role); 
     formData.append("username", input.username);
-    console.log(formData);
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
     if (input.file) {
       formData.append("image", input.file);
     }
-
+    
     try {
       const res = await axios.post(
         "https://127.0.0.1:8000/api/register/",
@@ -179,36 +181,46 @@ const Signup = () => {
           </div>
 
           <div className="my-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Role
-            </label>
-            <RadioGroup
-  value={input.role} // Bind the selected role from the state
-  onValueChange={(value) => setInput({ ...input, role: value })} // Update the role in the state when changed
-  className="flex gap-4 mt-2"
->
-  <div className="flex items-center space-x-2">
-    <input
-      type="radio"
-      name="role"
-      value="student"
-      className="cursor-pointer w-4 h-4"
-    />
-    <Label>Student</Label>
+  <label className="block text-sm font-medium text-gray-700">
+    Role
+  </label>
+  <div className="flex gap-4 mt-2">
+    <div className="flex items-center space-x-2">
+      <input
+        type="radio"
+        name="role"
+        value="Student"
+        checked={input.role === "Student"}
+        onChange={(e) => {
+          const newRole = e.target.value;
+          setInput(prev => {
+            console.log("Updating role to:", newRole);
+            return { ...prev, role: newRole };
+          });
+        }}
+        className="cursor-pointer w-4 h-4"
+      />
+      <label>Student</label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <input
+        type="radio"
+        name="role"
+        value="Recruiter"
+        checked={input.role === "Recruiter"}
+        onChange={(e) => {
+          const newRole = e.target.value;
+          setInput(prev => {
+            console.log("Updating role to:", newRole);
+            return { ...prev, role: newRole };
+          });
+        }}
+        className="cursor-pointer w-4 h-4"
+      />
+      <label>Recruiter</label>
+    </div>
   </div>
-  <div className="flex items-center space-x-2">
-    <input
-      type="radio"
-      name="role"
-      value="recruiter"
-      className="cursor-pointer w-4 h-4"
-    />
-    <Label>Recruiter</Label>
-  </div>
-</RadioGroup>
-
-          </div>
-
+</div>
           <div className="my-4">
             <label className="block text-sm font-medium text-gray-700">
               Profile Picture

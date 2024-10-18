@@ -27,7 +27,6 @@ const Signin = () => {
         {
           username: username,
           password: password,
-          type:role
         }
       );
       console.log(res.data.success);
@@ -36,8 +35,10 @@ const Signin = () => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("image", res.data.user.image);
-        console.log(res.data.user.image);
         localStorage.setItem("refresh", res.data.refresh);
+        if (res.data.user.type=="Recruiter"){
+          navigate("")
+        }
         navigate("/");
       }
       else{

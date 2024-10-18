@@ -28,8 +28,11 @@ export default function Navbar() {
     
     if (token && user||google) {
       setIsLoggedIn(true);
-       
-      let image=user.image.slice(13, user.image.length);
+      
+      let image;
+      if (user.image){ 
+      image=user.image.slice(13, user.image.length);}
+
       setProfilePhoto(image|| "download.jpg");
 
       // image=user.search("image/upload/");
