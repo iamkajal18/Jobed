@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from './Navbar';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -139,6 +140,14 @@ const ContactUs = () => {
     </div>
   );
 }
+function showContactUs() {
+  return (
+    <div>
+      <Navbar />
+      <ContactUs />
+    </div>
+  );
+}
+export default showContactUs;
 
 
-export default ContactUs;
