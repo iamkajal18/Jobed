@@ -24,11 +24,12 @@ export default function Navbar() {
 
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
+    const google = localStorage.getItem("authToken");
     
-    if (token && user) {
+    if (token && user||google) {
       setIsLoggedIn(true);
-  
-      let image=user.slice(user.search("image/upload/")+13,user.search("jpg")+3);
+       
+      let image=user.image
       setProfilePhoto(image|| "download.jpg");
 
       // image=user.search("image/upload/");

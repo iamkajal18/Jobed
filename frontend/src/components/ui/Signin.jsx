@@ -12,17 +12,18 @@ import "react-toastify/dist/ReactToastify.css";
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [role, setRole] = useState("");
   const navigate = useNavigate();
-
+  
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       console.log(username);
       console.log(password);
       const res = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/login/",
+        "https://127.0.0.1:8000/api/login/",
         {
           username: username,
           password: password,
@@ -33,7 +34,8 @@ const Signin = () => {
       if (res.data.success){
         console.log("Login successful",res.data);
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("user", res.data.user);
+        localStorage.setItem("image", res.data.user.image);
         console.log(res.data.user.image);
         localStorage.setItem("refresh", res.data.refresh);
         navigate("/");
