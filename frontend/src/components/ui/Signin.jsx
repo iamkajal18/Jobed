@@ -34,7 +34,7 @@ const Signin = () => {
       if (res.data.success){
         console.log("Login successful",res.data);
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", res.data.user);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("image", res.data.user.image);
         console.log(res.data.user.image);
         localStorage.setItem("refresh", res.data.refresh);

@@ -23,13 +23,15 @@ export default function Navbar() {
   useEffect(() => {
 
     const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
+    const user = JSON.parse(localStorage.getItem("user"));
     const google = localStorage.getItem("authToken");
     
     if (token && user||google) {
       setIsLoggedIn(true);
        
-      let image=user.image
+      let image=user.image.slice(13, user.image.length);
+
+      
       setProfilePhoto(image|| "download.jpg");
 
       // image=user.search("image/upload/");
