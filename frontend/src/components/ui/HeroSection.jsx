@@ -12,9 +12,12 @@ function HeroSection() {
           Join the No.1 Job Hunt Website and discover thousands of
           opportunities.
         </p>
+        <a href="/sign-up">
         <button className="bg-white text-blue-500 px-6 py-3 rounded-full font-semibold text-lg hover:bg-gray-200 transition">
           Get Started
         </button>
+        </a>
+       
       </div>
     </div>
   );
