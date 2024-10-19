@@ -1,19 +1,18 @@
-import CategoryCarousel from "./CategoryCarousel";
 import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 function HeroSection() {
   return (
-    <div className="bg-gray-400 text-black py-20 sm:py-16 md:py-24">
-      <div className="container mx-auto text-center px-4">
-        <h1 className="text-4xl font-bold mb-4 sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
-          Find Your Dream Job
+    <div className="bg-purple-200 text-black py-12">
+      <div className="container mx-auto text-center px-2">
+        <h1 className="text-2xl font-bold mb-1 sm:text-2xl  lg:text-2xl leading-tight">
+        <span className="text-[#dc2626] ">Find Your</span>  Dream Job
         </h1>
-        <p className="text-lg mb-8 sm:text-base md:text-lg lg:text-xl">
+        <p className="text-1xl mt-2 mb-2 sm:text-small md:text-small lg:text-small">
           Join the No.1 Job Hunt Website and discover thousands of
           opportunities.
         </p>
         <a href="/sign-up">
-        <button className="bg-white text-blue-500 px-6 py-3 rounded-full font-semibold text-lg hover:bg-gray-200 transition">
+        <button className="bg-white text-blue-500 px-1 py-1 rounded-full font-semibold text-1xl hover:bg-gray-200 transition">
           Get Started
         </button>
         </a>
@@ -255,7 +254,6 @@ function HomePage() {
     <div>
       <Navbar />
       <HeroSection />
-      <CategoryCarousel />
       <JobSearch />
       <LatestJob />
       <Features />
