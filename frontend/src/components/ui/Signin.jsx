@@ -1,55 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { Label } from "@radix-ui/react-label";
 import { Button } from "@/components/ui/button";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [role, setRole] = useState("");
   const navigate = useNavigate();
-  
+
+  // Google login token extraction and handling
+  useEffect(() => {
+    const handleGoogleLogin = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get("token");
+
+      if (token) {
+        // Save token and user data to local storage
+        localStorage.setItem("token", token);
+        
+        try {
+          const res = await axios.get("https://jobedinwebsite-production.up.railway.app/api/user-data/", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          localStorage.setItem("image", res.data.user.image);
+
+          if (res.data.user.type === "Recruiter") {
+            window.location.href = "https://jobedinwebsite-production.up.railway.app/admin/";
+          } else {
+            navigate("/");
+          }
+        } catch (error) {
+          console.error("Error fetching user data after Google login", error);
+        }
+      }
+    };
+
+    handleGoogleLogin();
+  }, [navigate]);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      console.log(username);
-      console.log(password);
       const res = await axios.post(
         "https://jobedinwebsite-production.up.railway.app/api/login/",
         {
-          username: username,
-          password: password,
+          username,
+          password,
         }
       );
-      console.log(res.data.success);
-      if (res.data.success){
-        console.log("Login successful",res.data);
+
+      if (res.data.success) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("image", res.data.user.image);
-        localStorage.setItem("refresh", res.data.refresh);
-        console.log(res.data.user.type);
-        if (res.data.user.type==="Recruiter"){
+
+        if (res.data.user.type === "Recruiter") {
           window.location.href = "https://jobedinwebsite-production.up.railway.app/admin/";
+        } else {
+          navigate("/");
         }
-        navigate("/");
-      }
-      else{
-        console.log("Login failed",res.data);
+      } else {
         toast.error("Invalid credentials");
       }
     } catch (error) {
-      console.error("Login failed",error);
+      console.error("Login failed", error);
     }
-
   };
 
   return (
@@ -74,7 +100,6 @@ const Signin = () => {
             <input
               type="text"
               id="username"
-              name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your username"
@@ -83,7 +108,6 @@ const Signin = () => {
             />
           </div>
 
-          {/* Password Field */}
           <div>
             <label
               htmlFor="password"
@@ -94,7 +118,6 @@ const Signin = () => {
             <input
               type="password"
               id="password"
-              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
@@ -103,7 +126,6 @@ const Signin = () => {
             />
           </div>
 
-          {/* Role Selection */}
           <div className="flex items-center space-x-6 mx-2 my-2">
             <RadioGroup
               className="flex gap-4"
@@ -137,7 +159,6 @@ const Signin = () => {
             </RadioGroup>
           </div>
 
-          {/* Submit Button */}
           <Button
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700"
@@ -145,7 +166,6 @@ const Signin = () => {
             Login
           </Button>
 
-          {/* Footer: Google and Facebook Auth */}
           <div className="flex flex-col items-center space-y-3 mt-6">
             <p className="text-sm text-gray-500">Or continue with</p>
             <div className="flex space-x-4">
@@ -156,7 +176,7 @@ const Signin = () => {
                     "https://jobedinwebsite-production.up.railway.app/accounts/google/login/")
                 }
               >
-               Google
+                Google
               </Button>
               <Button
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
@@ -165,7 +185,7 @@ const Signin = () => {
                     "https://jobedinwebsite-production.up.railway.app/accounts/github/login/")
                 }
               >
-               Github
+                Github
               </Button>
             </div>
           </div>
@@ -182,7 +202,6 @@ const Signin = () => {
         </form>
       </div>
 
-      {/* Toast Container */}
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </div>
   );
