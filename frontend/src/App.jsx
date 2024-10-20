@@ -12,6 +12,7 @@ import ContactUs from "./components/ui/ContactUs";
 import Profile from "./components/ui/Profile";
 
 function App() {
+  const job=localStorage.getItem("job");  
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -23,7 +24,7 @@ function App() {
     },
     {
       path: "/job",
-      element: <Job />,
+      element: <Job job={job} />,
     },
     {
       path: "/profile",

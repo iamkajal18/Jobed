@@ -1,6 +1,13 @@
 import LetterByLetterJobHeading from "./LetterByLetterJobHeading";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
+import JobList from "./JobList";
+// making an api call for getting job 
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+// import { resolveEnvPrefix } from "vite";
+
+
 
 function HeroSection() {
   return (
@@ -24,6 +31,7 @@ function HeroSection() {
 
 function JobSearch() {
   return (
+    
     <div className="py-8">
       <div className="container mx-auto text-center">
         <div className="flex justify-center">
@@ -49,40 +57,42 @@ function JobSearch() {
 }
 
 function LatestJob() {
+  const [jobs, setJobs] = useState([]);
+  
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get('https://jobedinwebsite-production.up.railway.app/api/get_job/'); // Replace with your backend URL
+        setJobs(response.data.jobs);
+        console.log(response.data.jobs)
+        // setting the data I means the jobs which comes from the response ka data response.data 
+        localStorage.setItem("job",response.data.jobs)
+        setLoading(false);
+      } catch (error) {
+        setError('Failed to fetch job data.');
+        setLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
   return (
-    <div className="py-12">
-      <div className="container mx-auto text-center">
-        <h2 className="text-2xl font-bold mb-8">
-          <span className="text-red-600">Latest & Top</span> Job Opportunity
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div
-              key={index}
-              className="p-6 bg-white shadow-lg rounded-lg"
-            >
-              <h4 className="text-md font-semibold mb-2">Company Name</h4>
-              <p>India</p>
-              <h4 className="text-md font-semibold mt-4">Job Title</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-              <div className="flex justify-start flex-wrap mt-4">
-                <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full mr-2">
-                  New
-                </span>
-                <span className="bg-red-100 text-red-800 text-sm font-medium px-3 py-1 rounded-full mr-2">
-                  Part Time
-                </span>
-                <span className="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">
-                  24LPA
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <>
+    <div className="container mx-auto text-center">
+    <h2 className="text-xl font-bold "> <span className="text-red-600">Latest Job </span> & Opportunty</h2>
     </div>
+    <div>
+     
+      <ul>
+        {jobs.map((job) => (
+          <JobList job={job}></JobList>
+
+        ))}
+      </ul>
+    </div>
+    </>
   );
 }
 
