@@ -31,7 +31,7 @@ const JobList = () => {
           {jobs.map((jobb) => (
             <div
               key={jobb.id}
-              className="bg-white shadow-lg hover:shadow-2xl transition-shadow rounded-lg p-8"
+              className="bg-white shadow-lg hover:shadow-2xl transition-shadow rounded-lg p-6"
             >
               <div className="flex items-center mb-4">
                 {jobb.company.image ? (
@@ -44,7 +44,7 @@ const JobList = () => {
                   <div className="bg-gray-200 w-16 h-16 rounded-full mr-4" />
                 )}
                 <div>
-                  <div className="font-bold text-lg">
+                  <div className="font-bold text-md">
                     {jobb.company.company_name}
                   </div>
                 </div>
@@ -53,20 +53,17 @@ const JobList = () => {
                 <span>
                   <FaMapMarkerAlt className="mr-2" /> {jobb.location}
                 </span>
-                <span>{jobb.created_at}</span>
+                <span className="text-sm">{jobb.created_at}</span>
               </div>
-              <div className="font-bold text-lg text-gray-800 mb-2">
-                {jobb.job_title}
+              <div className="font-bold text-sm text-gray-800 mb-2 flex items-center">
+                <FaBriefcase className="mr-1" /> {jobb.job_title}
               </div>
-              <p className="text-gray-500 mb-5">{jobb.description}</p>
+              <p className="text-gray-500 mb-5 text-sm">{jobb.description}</p>
               <div className="mt-4 flex items-center justify-between text-gray-600">
-                <span className="flex items-center">
-                  <FaBriefcase className="mr-2 text-md" /> {jobb.position}
-                </span>
                 <span className="flex items-center">
                   <FaRupeeSign className="mr-1" /> {jobb.salary}
                 </span>
-                <span className="text-blue-500 font-semibold">
+                <span className="text-blue-500 font-semibold text-sm">
                   {jobb.job_type}
                 </span>
               </div>
