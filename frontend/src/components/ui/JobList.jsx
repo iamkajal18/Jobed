@@ -74,6 +74,7 @@ const JobList = () => {
             </div>
             <div className="text-gray-600 mb-2 flex ">
               <FaMapMarkerAlt className="mr-2" /> {jobb.location}
+              <span>{jobb.created_at}</span>
             </div>
             <div className="font-bold text-md  text-gray-800 flex justify-between items-start">
               {jobb.job_title}
