@@ -57,26 +57,7 @@ function JobSearch() {
 }
 
 function LatestJob() {
-  const [jobs, setJobs] = useState([]);
-  
-
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await axios.get('https://jobedinwebsite-production.up.railway.app/api/get_job/'); // Replace with your backend URL
-        setJobs(response.data.jobs);
-        console.log(response.data.jobs)
-        // setting the data I means the jobs which comes from the response ka data response.data 
-        localStorage.setItem("job",response.data.jobs)
-        setLoading(false);
-      } catch (error) {
-        setError('Failed to fetch job data.');
-        setLoading(false);
-      }
-    };
-
-    fetchJobs();
-  }, []);
+ 
 
   return (
     <>
@@ -85,12 +66,7 @@ function LatestJob() {
     </div>
     <div>
      
-      <ul>
-        {jobs.map((job) => (
-          <JobList job={job}></JobList>
-
-        ))}
-      </ul>
+      <JobList /> 
     </div>
     </>
   );
