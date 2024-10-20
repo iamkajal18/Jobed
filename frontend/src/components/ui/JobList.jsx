@@ -24,6 +24,14 @@ const JobList = () => {
     fetchJobs();
   }, []);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const timeDiff = Math.abs(now - date);
+    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    return daysDiff === 0 ? "Today" : `${daysDiff} day${daysDiff > 1 ? 's' : ''} ago`;
+  };
+
   return (
     <div className="bg-white-200 py-4">
       <div className="container mx-auto">
@@ -47,13 +55,13 @@ const JobList = () => {
                   <div className="font-bold text-md">
                     {jobb.company.company_name}
                   </div>
+                  <div className="text-gray-600 text-sm flex items-center mb-2">
+                    <FaMapMarkerAlt className="mr-1" /> {jobb.location}
+                  </div>
+                  <div className="text-gray-600 text-sm">
+                    {formatDate(jobb.created_at)}
+                  </div>
                 </div>
-              </div>
-              <div className="text-gray-600 mb-2 flex justify-between">
-                <span>
-                  <FaMapMarkerAlt className="mr-2" /> {jobb.location}
-                </span>
-                <span className="text-sm">{jobb.created_at}</span>
               </div>
               <div className="font-bold text-sm text-gray-800 mb-2 flex items-center">
                 <FaBriefcase className="mr-1" /> {jobb.job_title}
