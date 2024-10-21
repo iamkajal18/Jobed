@@ -47,7 +47,7 @@ const JobList = () => {
                   <img
                     src={`http://res.cloudinary.com/djahxpuyx/${jobb.company.image}`}
                     alt={`${jobb.company.company_name} logo`}
-                    className="w-16 h-16 rounded-full mr-4"
+                    className="w-16  mr-4"
                   />
                 ) : (
                   <div className="bg-gray-200 w-16 h-16 rounded-full mr-4" />

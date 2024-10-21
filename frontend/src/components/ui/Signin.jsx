@@ -20,7 +20,7 @@ const Signin = () => {
     const handleGoogleLogin = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get("token");
-
+      console.log(urlParams)
       if (token) {
         // Save token and user data to local storage
         localStorage.setItem("token", token);

@@ -60,7 +60,7 @@ const Signup = () => {
   
     try {
       const res = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/register/",
+        "https://127.0.0.1:8000/api/register/",
 
         formData, 
         {
@@ -77,6 +77,9 @@ const Signup = () => {
           duration: 3000,
           position: "top-right",
         });
+        if(res.data.user.type=="Recruiter"){
+          windows.location.href="https://jobedinwebsite-production.up.railway.app/admin/"
+        }
         navigate("/sign-in");
       } else {
         toast.error(res.data.message || "Signup failed!", {
