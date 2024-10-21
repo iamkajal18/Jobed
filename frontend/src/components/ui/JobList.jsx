@@ -2,6 +2,7 @@ import React from "react";
 import { FaMapMarkerAlt, FaBriefcase, FaRupeeSign } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
@@ -77,12 +78,11 @@ const JobList = () => {
                 </span>
               </div>
               <div className="mt-6 flex">
-                <a
-                  href={`https://jobedinwebsite-production.up.railway.app/api/get_job_by_id/${jobb.id}`}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                <Link to={`/jobcard/${jobb.id}`}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800"
                 >
                   View Details
-                </a>
+                </Link>
               </div>
             </div>
           ))}

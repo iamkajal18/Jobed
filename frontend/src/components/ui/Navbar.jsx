@@ -24,6 +24,7 @@ export default function Navbar() {
 
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
+  
     const google = localStorage.getItem("authToken");
     
     if (token && user||google) {

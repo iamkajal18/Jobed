@@ -10,6 +10,7 @@ import AboutUs from "./components/ui/AboutUs";
 import Services from "./components/ui/Services";
 import ContactUs from "./components/ui/ContactUs";
 import Profile from "./components/ui/Profile";
+import JobCard from "./components/ui/jobCard";
 
 function App() {
   const job=localStorage.getItem("job");  
@@ -25,6 +26,10 @@ function App() {
     {
       path: "/job",
       element: <Job job={job} />,
+    },
+    {
+      path: "/jobcard/:id",
+      element: <JobCard />,
     },
     {
       path: "/profile",
