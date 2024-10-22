@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Footer from "./Footer";
+
 import {
   faMapMarkerAlt,
   faDollarSign,
@@ -10,6 +12,7 @@ import {
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./Navbar";
+import Slider from "./ProductCarousel";
 function JobCard() {
   const { id } = useParams();
   const [job, setJob] = useState(null);
@@ -45,9 +48,9 @@ function JobCard() {
   return (
     <div className="bg-gray-100 py-8">
       <div className="container mx-auto px-4 lg:px-12">
-        <h2 className="text-4xl font-bold mb-8">
+        <h3 className="text-2xl font-bold mb-8">
           <span className="text-red-600">Job</span> Details
-        </h2>
+        </h3>
 
         {error && <p className="text-red-600">{error}</p>}
 
@@ -185,6 +188,9 @@ function showDetails() {
     <>
       <Navbar></Navbar>
       <JobCard></JobCard>
+      <Slider></Slider>
+      <Footer></Footer>
+
     </>
   );
 }
