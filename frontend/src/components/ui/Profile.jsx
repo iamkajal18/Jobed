@@ -1,146 +1,474 @@
-import React from "react";
-import Navbar from "./Navbar";
 
-// You need to define jobInfo array or import it
-const jobInfo = [
-  // Example job data
-  {
-    company: "Company A",
-    location: "Location A",
-    title: "Job Title A",
-    details: "Job details A",
-    salary: "$60,000",
-  },
-  {
-    company: "Company B",
-    location: "Location B",
-    title: "Job Title B",
-    details: "Job details B",
-    salary: "$70,000",
-  },
-  {
-    company: "Company C",
-    location: "Location C",
-    title: "Job Title C",
-    details: "Job details C",
-    salary: "$80,000",
-  },
-];
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import {
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Select,
+  MenuItem,
+} from "@mui/material";
 
-function Profile() {
-  // Replace 'input.username' with the actual username, e.g., from props or state
-  const username = "input.username"; // Replace with the actual logic to get the username
+
+// User Basic Info Card
+const UserProfileCard = () => {
+  const { id }=useParams()
+  const [user, setUserDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchUserDetails = async () => {
+    try {
+      const response = await axios.get(`https://127.0.0.1:8000/api/profile/${id}`);
+      setUserDetails(response.data.data);
+    } catch (err) {
+      setError('Failed to fetch user details');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
+
+  if (loading) return <div>Your Profile is...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
-    <div className="py-6 sm:py-12">
-      <div className="bg-white">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
-          <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-10 shadow-2xl sm:rounded-3xl sm:px-12 md:py-16 lg:px-20 lg:py-24">
-            <svg
-              viewBox="0 0 1024 1024"
-              className="absolute inset-0 -z-10 h-full w-full [mask-image:radial-gradient(closest-side,white,transparent)]"
-              aria-hidden="true"
-            >
-              <circle
-                cx="512"
-                cy="512"
-                r="512"
-                fill="url(#759c1415-0410-454c-8f7c-9a820de03641)"
-                fillOpacity="0.7"
-              />
-              <defs>
-                <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
-                  <stop stopColor="#7775D6" />
-                  <stop offset="1" stopColor="#E935C1" />
-                </radialGradient>
-              </defs>
-            </svg>
+    <Card variant="outlined">
+      <CardContent>
+      <Typography color="text.secondary">
+        <img src={user.image} alt="Profile" />
+      </Typography>
+        <Typography variant="h5" component="div">
+          {user.first_name}
+        </Typography>
+        <Typography color="text.secondary">{user.email}</Typography>
+        <Typography color="text.secondary">{user.mobile_number}</Typography>
+        <Typography color="text.secondary">{user.address}</Typography>
+      </CardContent>
+    </Card>
+  );
+};
 
-            <img
-              src="shyam.jpg"
-              alt="Profile picture"
-              className="w-24 h-24 rounded-full mx-auto"
-            />
+// Main Form Component
+const ProfileUpdate = () => {
+  const [openProject, setOpenProject] = useState(false);
+  const [openCertification, setOpenCertification] = useState(false);
+  const [openWorkExperience, setOpenWorkExperience] = useState(false);
 
-            <div className="max-w-md mx-auto text-center lg:text-left lg:mx-0">
-              <h2 className="text-2xl font-bold tracking-tight text-white sm:text-2xl">
-                Username: {username}
-                <br />
-                Start using our app today.
-              </h2>
-              <p className="mt-4 text-lg leading-6 text-gray-300">
-                Biodata: Ac euismod vel sit maecenas id pellentesque eu sed
-                consectetur. Malesuada adipiscing sagittis vel nulla.
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <a
-                  href="/job"
-                  className="rounded-md bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                >
-                  Get started
-                </a>
-                <a
-                  href="/job"
-                  className="text-sm font-semibold leading-6 text-white"
-                >
-                  Learn more <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="relative mt-8 lg:mt-0">
-            <div className="py-1">
-              <div className="container mx-auto text-center p-8 bg-[#faf5ff] shadow-lg rounded-lg">
-                <h2 className="text-4xl font-bold mb-12">
-                  <span className="text-[#dc2626]">Apply</span> Job
-                  Opportunity
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {jobInfo.map((job, index) => (
-                    <div
-                      key={index}
-                      className="p-6 bg-white shadow-lg rounded-lg h-full flex flex-col justify-between"
-                    >
-                      <div>
-                        <h4 className="text-xl font-semibold mt-4">
-                          {job.company}
-                        </h4>
-                        <p className="text-gray-600">{job.location}</p>
-                        <h4 className="text-xl font-semibold mt-4">
-                          {job.title}
-                        </h4>
-                        <p className="text-gray-500">{job.details}</p>
-                      </div>
-                      <div className="mt-4">
-                        <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium m-1 px-2 py-1 rounded-lg">
-                          New
-                        </span>
-                        <span className="inline-block bg-blue-100 text-red-800 text-sm font-medium m-1 px-2 py-1 rounded-lg">
-                          Part Time
-                        </span>
-                        <span className="inline-block bg-blue-100 text-purple-800 text-sm font-medium m-1 px-2 py-1 rounded-lg">
-                          {job.salary}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  const [project, setProject] = useState({
+    project_title: "",
+    project_description: "",
+    repo_link: "",
+    website_link: "",
+    skills_used: "",
+  });
+
+  const [certification, setCertification] = useState({
+    title: "",
+    description: "",
+    start_month: "",
+    end_month: "",
+    link: "",
+    skills_used: "",
+  });
+
+  const [workExperience, setWorkExperience] = useState({
+    companyName: "",
+    work_type: "",
+    company_website: "",
+    location: "",
+    start_date: "",
+    end_date: "",
+    working: "",
+  });
+
+  const skills = [
+    'Communication',
+    'Teamwork',
+    'Leadership',
+    'Problem Solving',
+    'Time Management',
+    'Critical Thinking',
+    'Adaptability',
+    'Creativity',
+    'Emotional Intelligence',
+    'Conflict Resolution',
+    'Decision Making',
+    'Collaboration',
+    'Negotiation',
+    'Stress Management',
+    'Attention to Detail',
+    'Active Listening',
+    'Public Speaking',
+    'Interpersonal Skills',
+    'Organizational Skills',
+    'Work Ethic',
+    'Self-Motivation',
+    'Empathy',
+    'Flexibility',
+    'Coaching & Mentoring'
+  ];
+
+  const workTypes = ['Internship', 'Part-Time', 'Full-Time'];
+  const locations = ['Bengaluru', 'Hyderabad', 'Pune', 'Chennai', 'Mumbai', 'Delhi', 'Gurugram', 'Noida', 'Kolkata', 'Ahmedabad'];
+  const workingOptions = ['Working Currently', 'No'];
+
+  const handleOpenProject = () => setOpenProject(true);
+  const handleCloseProject = () => setOpenProject(false);
+
+  const handleOpenCertification = () => setOpenCertification(true);
+  const handleCloseCertification = () => setOpenCertification(false);
+
+  const handleOpenWorkExperience = () => setOpenWorkExperience(true);
+  const handleCloseWorkExperience = () => setOpenWorkExperience(false);
+
+  const handleChangeProject = (e) => {
+    const { name, value } = e.target;
+    setProject({
+      ...project,
+      [name]: value,
+    });
+  };
+
+  const handleChangeCertification = (e) => {
+    const { name, value } = e.target;
+    setCertification({
+      ...certification,
+      [name]: value,
+    });
+  };
+
+  const handleChangeWorkExperience = (e) => {
+    const { name, value } = e.target;
+    setWorkExperience({
+      ...workExperience,
+      [name]: value,
+    });
+  };
+
+  const handleContinueProject = async () => {
+    try {
+      const response = await axios.post("/api/projects", project);
+      console.log("Project updated:", response.data);
+      handleCloseProject();
+    } catch (error) {
+      console.error("Error updating project:", error);
+    }
+  };
+
+  const handleContinueCertification = async () => {
+    try {
+      const response = await axios.post("/api/certifications", certification);
+      console.log("Certification updated:", response.data);
+      handleCloseCertification();
+    } catch (error) {
+      console.error("Error updating certification:", error);
+    }
+  };
+
+  const handleContinueWorkExperience = async () => {
+    try {
+      const response = await axios.post("/api/work-experiences", workExperience);
+      console.log("Work experience updated:", response.data);
+      handleCloseWorkExperience();
+    } catch (error) {
+      console.error("Error updating work experience:", error);
+    }
+  };
+
+  // Example user data, you can fetch this from your API
+  const user = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    phone: "123-456-7890",
+    location: "New York",
+  };
+
+  return (
+    <div style={{ display: "flex" }}>
+      {/* Sidebar with User Info */}
+      <div style={{ width: "25%", padding: "20px" }}>
+        <UserProfileCard user={user} />
+        <Button variant="outlined" onClick={handleOpenProject} fullWidth style={{ marginTop: "20px" }}>
+          Add Project
+        </Button>
+        <Button variant="outlined" onClick={handleOpenCertification} fullWidth style={{ marginTop: "10px" }}>
+          Add Certification
+        </Button>
+        <Button variant="outlined" onClick={handleOpenWorkExperience} fullWidth style={{ marginTop: "10px" }}>
+          Add Work Experience
+        </Button>
+        
       </div>
+
+      {/* Main Content Area */}
+      <div style={{ width: "75%", padding: "20px" }}>
+        <Typography variant="h4">Update Profile Information</Typography>
+      </div>
+
+      {/* Project Dialog */}
+      <Dialog open={openProject} onClose={handleCloseProject}>
+        <DialogTitle>Add Project</DialogTitle>
+        <DialogContent>
+          <TextField
+            name="project_title"
+            label="Project Title"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={project.project_title}
+            onChange={handleChangeProject}
+          />
+          <TextField
+            name="project_description"
+            label="Project Description"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            multiline
+            rows={4}
+            value={project.project_description}
+            onChange={handleChangeProject}
+          />
+          <TextField
+            name="repo_link"
+            label="Repository Link"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={project.repo_link}
+            onChange={handleChangeProject}
+          />
+          <TextField
+            name="website_link"
+            label="Website Link"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={project.website_link}
+            onChange={handleChangeProject}
+          />
+          <Select
+            name="skills_used"
+            label="Skills Used"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={project.skills_used}
+            onChange={handleChangeProject}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {skills.map((skill) => (
+              <MenuItem key={skill} value={skill}>
+                {skill}
+              </MenuItem>
+            ))}
+          </Select>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleContinueProject} color="primary">
+            Continue
+          </Button>
+          <Button onClick={handleCloseProject} color="secondary">
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Certification Dialog */}
+      <Dialog open={openCertification} onClose={handleCloseCertification}>
+        <DialogTitle>Add Certification</DialogTitle>
+        <DialogContent>
+          <TextField
+            name="title"
+            label="Certification Title"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={certification.title}
+            onChange={handleChangeCertification}
+          />
+          <TextField
+            name="description"
+            label="Description"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            multiline
+            rows={4}
+            value={certification.description}
+            onChange={handleChangeCertification}
+          />
+          <TextField
+            name="start_month"
+            label="Start Month"
+            type="month"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={certification.start_month}
+            onChange={handleChangeCertification}
+          />
+          <TextField
+            name="end_month"
+            label="End Month"
+            type="month"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={certification.end_month}
+            onChange={handleChangeCertification}
+          />
+          <TextField
+            name="link"
+            label="Certification Link"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={certification.link}
+            onChange={handleChangeCertification}
+          />
+          <TextField
+            name="skills_used"
+            label="Skills Used"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={certification.skills_used}
+            onChange={handleChangeCertification}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleContinueCertification} color="primary">
+            Continue
+          </Button>
+          <Button onClick={handleCloseCertification} color="secondary">
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Work Experience Dialog */}
+      <Dialog open={openWorkExperience} onClose={handleCloseWorkExperience}>
+        <DialogTitle>Add Work Experience</DialogTitle>
+        <DialogContent>
+          <TextField
+            name="companyName"
+            label="Company Name"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={workExperience.companyName}
+            onChange={handleChangeWorkExperience}
+          />
+          <Select
+            name="work_type"
+            label="Work Type"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={workExperience.work_type}
+            onChange={handleChangeWorkExperience}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {workTypes.map((type) => (
+              <MenuItem key={type} value={type}>
+                {type}
+              </MenuItem>
+            ))}
+          </Select>
+          <TextField
+            name="company_website"
+            label="Company Website"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={workExperience.company_website}
+            onChange={handleChangeWorkExperience}
+          />
+          <Select
+            name="location"
+            label="Location"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={workExperience.location}
+            onChange={handleChangeWorkExperience}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {locations.map((location) => (
+              <MenuItem key={location} value={location}>
+                {location}
+              </MenuItem>
+            ))}
+          </Select>
+          <TextField
+            name="start_date"
+            label="Start Date"
+            type="date"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={workExperience.start_date}
+            onChange={handleChangeWorkExperience}
+          />
+          <TextField
+            name="end_date"
+            label="End Date"
+            type="date"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={workExperience.end_date}
+            onChange={handleChangeWorkExperience}
+          />
+          <Select
+            name="working"
+            label="Working"
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            value={workExperience.working}
+            onChange={handleChangeWorkExperience}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {workingOptions.map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </Select>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleContinueWorkExperience} color="primary">
+            Continue
+          </Button>
+          <Button onClick={handleCloseWorkExperience} color="secondary">
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
-}
+};
 
-function ProfileShow() {
-  return (
-    <>
-      <Navbar />
-      <Profile />
-    </>
-  );
-}
-
-export default ProfileShow;
+export default ProfileUpdate;

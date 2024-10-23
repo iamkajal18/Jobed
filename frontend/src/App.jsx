@@ -31,8 +31,9 @@ function App() {
       path: "/jobcard/:id",
       element: <JobCard />,
     },
+   
     {
-      path: "/profile",
+      path: "/profile/:id",
       element: <Profile />,
     },
     {
