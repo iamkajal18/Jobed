@@ -60,7 +60,7 @@ const Signup = () => {
   
     try {
       const res = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/login/",
+        "https://jobedinwebsite-production.up.railway.app/api/register/",
         formData, 
         {
           headers: {
