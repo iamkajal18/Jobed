@@ -2,12 +2,11 @@ import LetterByLetterJobHeading from "./LetterByLetterJobHeading";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 import JobList from "./JobList";
-// making an api call for getting job 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+// making an api call for getting job
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Footer from "./Footer";
 // import { resolveEnvPrefix } from "vite";
-
-
 
 function HeroSection() {
   return (
@@ -17,7 +16,8 @@ function HeroSection() {
           <LetterByLetterJobHeading />
         </h1>
         <p className="text-2xl mt-4 mb-6 sm:text-sm lg:text-sm">
-          Join the No.1 Job Hunt Website and discover thousands of opportunities.
+          Join the No.1 Job Hunt Website and discover thousands of
+          opportunities.
         </p>
         <a href="/sign-up">
           <button className="bg-white text-blue-500 px-6 py-3 rounded-full font-semibold text-sm hover:bg-gray-200 transition">
@@ -31,7 +31,6 @@ function HeroSection() {
 
 function JobSearch() {
   return (
-    
     <div className="py-8">
       <div className="container mx-auto text-center">
         <div className="flex justify-center">
@@ -57,17 +56,17 @@ function JobSearch() {
 }
 
 function LatestJob() {
- 
-
   return (
     <>
-    <div className="container mx-auto text-center">
-    <h2 className="text-xl font-bold "> <span className="text-red-600">Latest Job </span> & Opportunty</h2>
-    </div>
-    <div>
-     
-      <JobList /> 
-    </div>
+      <div className="container mx-auto text-center">
+        <h2 className="text-xl font-bold ">
+          {" "}
+          <span className="text-red-600">Latest Job </span> & Opportunty
+        </h2>
+      </div>
+      <div>
+        <JobList />
+      </div>
     </>
   );
 }
@@ -76,19 +75,33 @@ function Features() {
   return (
     <div className="bg-gray-100 py-20">
       <div className="container mx-auto text-center">
-        <h2 className="text-xl font-bold mb-12"> <span className="text-red-600">Why Choose</span> Us</h2>
+        <h2 className="text-xl font-bold mb-12">
+          {" "}
+          <span className="text-red-600">Why Choose</span> Us
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="p-8 bg-white shadow-lg rounded-lg">
             <h4 className="text-md font-semibold mb-4">Verified Jobs</h4>
-            <p>All jobs posted on our site are verified by industry professionals.</p>
+            <p>
+              All jobs posted on our site are verified by industry
+              professionals.
+            </p>
           </div>
           <div className="p-8 bg-white shadow-lg rounded-lg">
-            <h4 className="text-md font-semibold mb-4">User-Friendly Interface</h4>
-            <p>We offer a simple and intuitive platform for job seekers and recruiters.</p>
+            <h4 className="text-md font-semibold mb-4">
+              User-Friendly Interface
+            </h4>
+            <p>
+              We offer a simple and intuitive platform for job seekers and
+              recruiters.
+            </p>
           </div>
           <div className="p-8 bg-white shadow-lg rounded-lg">
             <h4 className="text-md font-semibold mb-4">Career Advice</h4>
-            <p>Our <Link to="https://iamadi-blog.onrender.com/">Blog</Link> provides expert career advice and tips.</p>
+            <p>
+              Our <Link to="https://iamadi-blog.onrender.com/">Blog</Link>{" "}
+              provides expert career advice and tips.
+            </p>
           </div>
         </div>
       </div>
@@ -100,7 +113,10 @@ function Testimonials() {
   return (
     <div className="py-20">
       <div className="container mx-auto text-center">
-        <h2 className="text-2xl font-bold mb-12"> <span className="text-red-600">What Our</span> Users Say</h2>
+        <h2 className="text-2xl font-bold mb-12">
+          {" "}
+          <span className="text-red-600">What Our</span> Users Say
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="p-8 bg-white shadow-lg rounded-lg">
             <p>"Waiting For The Feedback"</p>
@@ -112,25 +128,7 @@ function Testimonials() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="bg-gray-800 text-white py-8">
-      <div className="container mx-auto text-center">
-        <p>&copy; Kajal Kasaudhan All Rights Reserved.</p>
-        <p className="mt-4">
-          Follow us on:
-          <a href="https://github.com/iamkajal18" className="ml-2 text-blue-400">
-            GitHub
-          </a>
-          |
-          <a href="https://www.linkedin.com/in/iamkajalkasaudhan/" className="ml-2 text-blue-400">
-            LinkedIn
-          </a>
-        </p>
-      </div>
-    </footer>
-  );
-}
+<Footer />;
 
 function HomePage() {
   return (
