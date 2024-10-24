@@ -15,14 +15,13 @@ const Signin = () => {
   const [role, setRole] = useState("");
   const navigate = useNavigate();
 
-  // Google login token extraction and handling
   useEffect(() => {
     const handleGoogleLogin = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get("token");
+      console.log("The token is" ,token)
       console.log(urlParams)
       if (token) {
-        // Save token and user data to local storage
         localStorage.setItem("token", token);
         
         try {
@@ -173,7 +172,7 @@ const Signin = () => {
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
                 onClick={() =>
                   (window.location.href =
-                    "https://jobedinwebsite-production.up.railway.app/api/accounts/google/login/")
+                    "https://jobedinwebsite-production.up.railway.app/accounts/google/login/")
                 }
               >
                 Google
@@ -182,7 +181,7 @@ const Signin = () => {
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
                 onClick={() =>
                   (window.location.href =
-                    "https://jobedinwebsite-production.up.railway.app/api/accounts/github/login/")
+                    "https://jobedinwebsite-production.up.railway.app/accounts/github/login/")
                 }
               >
                 Github
