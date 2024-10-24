@@ -61,7 +61,6 @@ const Signin = () => {
     handleGoogleAuth();
   }, [navigate]);
 
-  // Handle Manual Login
   const handleManualLogin = async (e) => {
     e.preventDefault();
     
