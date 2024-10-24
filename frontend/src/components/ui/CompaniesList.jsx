@@ -4,18 +4,18 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const JobList = () => {
-  const [jobs, setJobs] = useState([]);
+const CompaniesList = () => {
+  const [companies, setcompany] = useState([]);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         const response = await axios.get(
-          "https://jobedinwebsite-production.up.railway.app/api/get_job/"
+          "https://jobedinwebsite-production.up.railway.app/api/get_companies/"
         ); // Replace with your backend URL
-        setJobs(response.data.jobs);
-        console.log(response.data.jobs);
-        localStorage.setItem("job", JSON.stringify(response.data.jobs)); // Store jobs as a string
+        setcompany(response.data.comapnies);
+    
+        //localStorage.setItem("job", JSON.stringify(response.data.jobs)); // Store jobs as a string
       } catch (error) {
         console.log(error);
       }
@@ -36,16 +36,16 @@ const JobList = () => {
     <div className="bg-white py-4">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-          {jobs.map((jobb) => (
+          {companies.map((company) => (
             <div
-              key={jobb.id}
+              key={company.id}
               className="bg-white shadow-lg hover:shadow-2xl transition-shadow rounded-lg p-6 flex flex-col h-full"
             >
               <div className="flex items-center mb-4">
-                {jobb.company.image ? (
+                {company.image ? (
                   <img
-                    src={`http://res.cloudinary.com/djahxpuyx/${jobb.company.image}`}
-                    alt={`${jobb.company.company_name} logo`}
+                    src={`http://res.cloudinary.com/djahxpuyx/${company.image}`}
+                    alt={`${company.company_name} logo`}
                     className="w-16 h-16 rounded-full mr-4"
                   />
                 ) : (
@@ -53,37 +53,17 @@ const JobList = () => {
                 )}
                 <div>
                   <div className="font-bold text-md">
-                    {jobb.company.company_name}
+                    {company.company_name}
                   </div>
                   <div className="text-gray-600 text-sm flex items-center mb-2">
-                    <FaMapMarkerAlt className="mr-1" /> {jobb.location}
+                    <FaMapMarkerAlt className="mr-1" /> {company.company_address}
                   </div>
                   <div className="text-gray-600 text-sm">
-                    {formatDate(jobb.created_at)}
+                    {formatDate(company.created_at)}
                   </div>
                 </div>
               </div>
-              <div className="font-bold text-sm text-gray-800 mb-2 flex items-center">
-                <FaBriefcase className="mr-1" /> {jobb.job_title}
-              </div>
-
-              <p className="text-gray-500 mb-5 text-sm flex-grow">{jobb.postition}</p>
-              <div className="mt-auto flex items-center justify-between text-gray-600">
-                <span className="flex items-center">
-                  <FaRupeeSign className="mr-1" /> {jobb.salary}
-                </span>
-                <span className="text-blue-500 font-semibold text-sm">
-                  {jobb.job_type}
-                </span>
-              </div>
-              <div className="mt-6 flex">
-                <Link
-                  to={`/jobcard/${jobb.id}`}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800 w-full text-center"
-                >
-                  View Details
-                </Link>
-              </div>
+             
             </div>
           ))}
         </div>
@@ -92,4 +72,4 @@ const JobList = () => {
   );
 };
 
-export default JobList;
+export default CompaniesList;

@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
+
 // Custom arrow component for the next button
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -48,7 +49,9 @@ const SamplePrevArrow = (props) => {
         cursor: "pointer",
       }}
     >
+
       <span>←</span>
+     
     </div>
   );
 };
@@ -107,7 +110,7 @@ const TopCompanies = () => {
           {" "}
           <span className="text-red-600">Top  </span>  Companies
         </h2>
-        <Link to="/view-all" className="text-blue-500">
+        <Link to="/viewcompanies" className="text-blue-500">
           View all
         </Link>
       </div>

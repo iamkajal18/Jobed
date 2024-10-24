@@ -11,6 +11,8 @@ import Services from "./components/ui/Services";
 import ContactUs from "./components/ui/ContactUs";
 import Profile from "./components/ui/Profile";
 import JobCard from "./components/ui/jobCard";
+import CompaniesList from "./components/ui/CompaniesList";
+
 
 function App() {
   const job=localStorage.getItem("job");  
@@ -23,6 +25,8 @@ function App() {
       path: "/home",
       element: <Home />,
     },
+   
+
     {
       path: "/job",
       element: <Job job={job} />,
@@ -31,7 +35,10 @@ function App() {
       path: "/jobcard/:id",
       element: <JobCard />,
     },
-   
+    {
+      path: "/viewcompanies",
+      element: <CompaniesList />,
+    },
     {
       path: "/profile/:id",
       element: <Profile />,
