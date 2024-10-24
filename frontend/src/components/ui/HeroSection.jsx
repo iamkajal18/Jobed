@@ -137,7 +137,6 @@ function HomePage() {
       <Navbar />
       <HeroSection />
       <JobSearch />
-      
       <TopCompanies></TopCompanies>
       <LatestJob />
       <Features />
