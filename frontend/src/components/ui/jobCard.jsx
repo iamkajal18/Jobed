@@ -12,7 +12,7 @@ import {
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./Navbar";
-import Slider from "./ProductCarousel";
+import Slider from "./TopCompanies";
 function JobCard() {
   const { id } = useParams();
   const [job, setJob] = useState(null);

@@ -6,6 +6,7 @@ import JobList from "./JobList";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "./Footer";
+import TopCompanies from "./TopCompanies";
 // import { resolveEnvPrefix } from "vite";
 
 function HeroSection() {
@@ -136,6 +137,7 @@ function HomePage() {
       <Navbar />
       <HeroSection />
       <JobSearch />
+      <TopCompanies></TopCompanies>
       <LatestJob />
       <Features />
       <Testimonials />
