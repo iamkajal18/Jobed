@@ -46,8 +46,8 @@ const TopCompanies = () => {
         const response = await axios.get(
           "https://jobedinwebsite-production.up.railway.app/api/get_companies/"
         );
-        setCompanies(response.data.companies);
-        localStorage.setItem("companies", JSON.stringify(response.data.companies));
+        setCompanies(response.data.comapnies); // Fix Typo in 
+        localStorage.setItem("companies", JSON.stringify(response.data.comapnies)); // Typo in the API response
         setLoading(false);
       } catch (error) {
         console.error(error);
