@@ -11,17 +11,13 @@ import Services from "./components/ui/Services";
 import ContactUs from "./components/ui/ContactUs";
 import Profile from "./components/ui/Profile";
 import JobCard from "./components/ui/jobCard";
-
 import { GoogleOAuthProvider } from '@react-oauth/google';
-
 import CompaniesList from "./components/ui/CompaniesList";
 
 
 
 function App() {
   const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-
-
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -31,8 +27,6 @@ function App() {
       path: "/home",
       element: <Home />,
     },
-   
-
     {
       path: "/job",
       element: <Job/>,
