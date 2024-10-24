@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Using react-icons for example
 const TopCompanies = () => {
   const [company, setCompany] = useState([]);
 
@@ -32,23 +33,25 @@ const TopCompanies = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    prevArrow: <FaArrowLeft style={{ fontSize: '20px', color: '#333' }} />, // Custom left arrow
+    nextArrow: <FaArrowRight style={{ fontSize: '20px', color: '#333' }} />, // Custom right arrow
     responsive: [
       {
         breakpoint: 640,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 768,
         settings: {
           slidesToShow: 3,
         },
       },
       {
-        breakpoint: 1024,
+        breakpoint: 768,
         settings: {
           slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
         },
       },
     ],
