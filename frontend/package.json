@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "exports": {
+    "./css": "./swiper.min.css",
+    "./css/bundle": "./swiper-bundle.min.css"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -46,7 +50,7 @@
     "react-toastify": "^10.0.5",
     "slick-carousel": "^1.8.1",
     "sonner": "^1.5.0",
-    "swiper": "^11.1.14",
+    "swiper": "^6.8.4",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.6.2"
