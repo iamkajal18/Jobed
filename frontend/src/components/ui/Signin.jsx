@@ -28,7 +28,7 @@ const Signin = () => {
       console.log(credentialResponse.credential);
       // Send the token to your backend
       const response = await axios.post(
-        "https://jobedinwebsite-production.up.railway.app/api/login/",
+        "https://127.0.0.1:8000/api/login/",
         {
           credential: credentialResponse.credential
           
