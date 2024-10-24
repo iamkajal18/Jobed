@@ -11,12 +11,12 @@ import Services from "./components/ui/Services";
 import ContactUs from "./components/ui/ContactUs";
 import Profile from "./components/ui/Profile";
 import JobCard from "./components/ui/jobCard";
-<<<<<<< HEAD
+
 import { GoogleOAuthProvider } from '@react-oauth/google';
-=======
+
 import CompaniesList from "./components/ui/CompaniesList";
 
->>>>>>> 0694e88e87163df9cbc2b8c0806ee474cf272771
+
 
 function App() {
   const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
