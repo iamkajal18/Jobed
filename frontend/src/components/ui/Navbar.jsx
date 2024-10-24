@@ -25,15 +25,22 @@ export default function Navbar() {
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
   
-    const google = localStorage.getItem("authToken");
-    
-    if (token && user||google) {
-      setIsLoggedIn(true);
-      
-      let image;
-      if (user.image){ 
-      image=user.image.slice(13, user.image.length);}
 
+    
+    if (token && user) {
+      setIsLoggedIn(true);
+      console.log(user)
+      let image;
+      
+      if (user.image){ 
+        if(user.last_name){
+          image=user.image
+          
+        }
+        else{
+      image=user.image.slice(13, user.image.length);}
+    }
+      
       setProfilePhoto(image|| "download.jpg");
 
       // image=user.search("image/upload/");
