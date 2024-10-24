@@ -31,8 +31,9 @@ function App() {
       path: "/jobcard/:id",
       element: <JobCard />,
     },
+   
     {
-      path: "/profile",
+      path: "/profile/:id",
       element: <Profile />,
     },
     {
@@ -61,6 +62,7 @@ function App() {
     <>
       <div>
         <RouterProvider router={appRouter} />
+      
       </div>
     </>
   );

@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 
 const About1 = () => {
+  const fullText = `
+    Welcome to JobedIn, your one-stop solution for all career needs! We are committed to
+    bridging the gap between job seekers and employers, making the hiring process easier, faster,
+    and more efficient.`;
+
+  const [displayedText, setDisplayedText] = useState('');
+  const [index, setIndex] = useState(0);
+  const typingSpeed = 50; // typing speed in milliseconds
+
+  useEffect(() => {
+    if (index < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev + fullText[index]);
+        setIndex((prev) => prev + 1);
+      }, typingSpeed);
+      return () => clearTimeout(timeout);
+    }
+  }, [index]);
+
   return (
     <div className="about-us-container p-8 bg-gray-100 min-h-screen">
       <h1 className="text-4xl font-bold mb-4">About Us</h1>
-      <p className="mb-6 text-lg">
-        Welcome to <strong>JobedIn</strong>, your one-stop solution for all career needs! We are committed to
-        bridging the gap between job seekers and employers, making the hiring process easier, faster,
-        and more efficient.
-      </p>
+      <p className="mb-6 text-lg">{displayedText}</p>
 
       <h2 className="text-2xl font-semibold mb-3">For Job Seekers:</h2>
       <ul className="mb-6 list-disc list-inside">
@@ -73,16 +88,12 @@ function AboutUs() {
   return (
     <div>
       <Navbar />
-      <About1></About1>
-      <Footer />
-      <About2></About2>
+      <About1 />
+      
+      <About2 />
 
     </div>
   );
 }
 
 export default AboutUs;
-
-
-
-

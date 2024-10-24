@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
-import SwiperCore, { Navigation, Pagination } from "swiper";
-
-// Install Swiper modules
-SwiperCore.use([Navigation, Pagination]);
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const TopCompanies = () => {
   const [company, setCompany] = useState([]);
@@ -16,7 +12,7 @@ const TopCompanies = () => {
       try {
         const response = await axios.get(
           "https://jobedinwebsite-production.up.railway.app/api/get_companies/"
-        ); // Replace with your backend URL
+        );
         setCompany(response.data.comapnies);
         console.log(response.data.comapnies);
 
@@ -29,6 +25,35 @@ const TopCompanies = () => {
     fetchCompany();
   }, []);
 
+  // Settings for the carousel
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="max-w-6xl mx-auto my-8 px-4">
       <div className="flex justify-between items-center mb-4">
@@ -38,27 +63,10 @@ const TopCompanies = () => {
         </a>
       </div>
 
-      {/* Swiper carousel */}
-      <Swiper
-        spaceBetween={20}
-        slidesPerView={1}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-          },
-          768: {
-            slidesPerView: 3,
-          },
-          1024: {
-            slidesPerView: 4,
-          },
-        }}
-        navigation
-        pagination={{ clickable: true }}
-        className="mySwiper"
-      >
+      {/* Slick carousel */}
+      <Slider {...settings}>
         {company.map((company, index) => (
-          <SwiperSlide key={index}>
+          <div key={index}>
             <div className="border p-4 rounded-lg shadow-lg flex flex-col items-center">
               <img
                 src={`http://res.cloudinary.com/djahxpuyx/${company.image}`}
@@ -80,9 +88,9 @@ const TopCompanies = () => {
                 View jobs
               </a>
             </div>
-          </SwiperSlide>
+          </div>
         ))}
-      </Swiper>
+      </Slider>
     </div>
   );
 };

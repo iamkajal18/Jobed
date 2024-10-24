@@ -11,71 +11,107 @@ import "react-toastify/dist/ReactToastify.css";
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const [role, setRole] = useState("");
   const navigate = useNavigate();
 
-  // Google login token extraction and handling
+  // Handle Google Authentication on component mount
   useEffect(() => {
-    const handleGoogleLogin = async () => {
+    const handleGoogleAuth = async () => {
+      console.log("Current URL:", window.location.href);
+      
       const urlParams = new URLSearchParams(window.location.search);
-      const token = urlParams.get("token");
-      console.log(urlParams)
-      if (token) {
-        // Save token and user data to local storage
-        localStorage.setItem("token", token);
-        
-        try {
-          const res = await axios.get("https://jobedinwebsite-production.up.railway.app/api/user-data/", {
+      console.log("URL Parameters:", Object.fromEntries(urlParams.entries()));
+
+      // Check for different possible token parameters
+      const token = urlParams.get("token") || 
+                   urlParams.get("access_token") || 
+                   urlParams.get("id_token");
+                   
+      console.log("Found token:", token);
+      
+      try {
+        // Get user info from Google
+        const userInfoResponse = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          });
+          }
+        );
 
-          localStorage.setItem("user", JSON.stringify(res.data.user));
-          localStorage.setItem("image", res.data.user.image);
+        if (userInfoResponse.data) {
+          // Store authentication data
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(userInfoResponse.data.user));
+          localStorage.setItem("image", userInfoResponse.data.user.avtar_url);
 
-          if (res.data.user.type === "Recruiter") {
+
+          if (userInfoResponse.data.user.type === "Recruiter") {
             window.location.href = "https://jobedinwebsite-production.up.railway.app/admin/";
           } else {
             navigate("/");
           }
-        } catch (error) {
-          console.error("Error fetching user data after Google login", error);
+          
+          toast.success("Successfully logged in with Google!");
         }
+      } catch (error) {
+        console.error("Google authentication error:", error);
+        toast.error("Failed to authenticate with Google");
       }
     };
 
-    handleGoogleLogin();
+    handleGoogleAuth();
   }, [navigate]);
 
-  const submitHandler = async (e) => {
+  // Handle Manual Login
+  const handleManualLogin = async (e) => {
     e.preventDefault();
+    
+    if (!username || !password ) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
     try {
-      const res = await axios.post(
+      const response = await axios.post(
         "https://jobedinwebsite-production.up.railway.app/api/login/",
         {
           username,
           password,
+        
         }
       );
 
-      if (res.data.success) {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        localStorage.setItem("image", res.data.user.image);
+      if (response.data.success) {
+        
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("image", response.data.user.image);
 
-        if (res.data.user.type === "Recruiter") {
+        if (response.data.user.type === "Recruiter") {
           window.location.href = "https://jobedinwebsite-production.up.railway.app/admin/";
         } else {
           navigate("/");
         }
-      } else {
-        toast.error("Invalid credentials");
+        
+        toast.success("Successfully logged in!");
       }
     } catch (error) {
-      console.error("Login failed", error);
+      console.error("Manual login error:", error);
+      toast.error(error.response?.data?.message || "Invalid credentials");
     }
+  };
+
+
+  const handleSocialLogin = (provider) => {
+    const baseUrl = "https://jobedinwebsite-production.up.railway.app/accounts";
+    const urls = {
+      google: `${baseUrl}/google/login/`,
+      github: `${baseUrl}/github/login/`
+    };
+    
+    window.location.href = urls[provider];
   };
 
   return (
@@ -83,7 +119,7 @@ const Signin = () => {
       <Navbar />
       <div className="flex flex-1 items-center justify-center px-4 sm:px-6 lg:px-8">
         <form
-          onSubmit={submitHandler}
+          onSubmit={handleManualLogin}
           className="w-full max-w-sm border border-gray-200 rounded-md p-4 shadow-md bg-white mt-10 mb-10"
         >
           <h1 className="text-2xl font-bold text-gray-800 text-center mb-4">
@@ -126,38 +162,7 @@ const Signin = () => {
             />
           </div>
 
-          <div className="flex items-center space-x-6 mx-2 my-2">
-            <RadioGroup
-              className="flex gap-4"
-              value={role}
-              onValueChange={setRole}
-            >
-              <div className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  id="student"
-                  name="role"
-                  value="Student"
-                  checked={role === "Student"}
-                  onChange={() => setRole("Student")}
-                  className="cursor-pointer w-4 h-4"
-                />
-                <Label htmlFor="student">Student</Label>
-              </div>
-              <div className="flex items-center space-x-2 mx-2 my-2">
-                <input
-                  type="radio"
-                  id="recruiter"
-                  name="role"
-                  value="Recruiter"
-                  checked={role === "Recruiter"}
-                  onChange={() => setRole("Recruiter")}
-                  className="cursor-pointer w-4 h-4"
-                />
-                <Label htmlFor="recruiter">Recruiter</Label>
-              </div>
-            </RadioGroup>
-          </div>
+         
 
           <Button
             type="submit"
@@ -170,20 +175,16 @@ const Signin = () => {
             <p className="text-sm text-gray-500">Or continue with</p>
             <div className="flex space-x-4">
               <Button
+                type="button"
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
-                onClick={() =>
-                  (window.location.href =
-                    "https://jobedinwebsite-production.up.railway.app/api/accounts/google/login/")
-                }
+                onClick={() => handleSocialLogin('google')}
               >
                 Google
               </Button>
               <Button
+                type="button"
                 className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700"
-                onClick={() =>
-                  (window.location.href =
-                    "https://jobedinwebsite-production.up.railway.app/api/accounts/github/login/")
-                }
+                onClick={() => handleSocialLogin('github')}
               >
                 Github
               </Button>
