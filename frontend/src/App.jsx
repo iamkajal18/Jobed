@@ -11,13 +11,16 @@ import Services from "./components/ui/Services";
 import ContactUs from "./components/ui/ContactUs";
 import Profile from "./components/ui/Profile";
 import JobCard from "./components/ui/jobCard";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
-  const job=localStorage.getItem("job");  
+  const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const job = localStorage.getItem("job");
+
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <HeroSection></HeroSection>,
+      element: <HeroSection />,
     },
     {
       path: "/home",
@@ -31,7 +34,6 @@ function App() {
       path: "/jobcard/:id",
       element: <JobCard />,
     },
-   
     {
       path: "/profile/:id",
       element: <Profile />,
@@ -59,12 +61,11 @@ function App() {
   ]);
 
   return (
-    <>
-      <div>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <div className="app">
         <RouterProvider router={appRouter} />
-      
       </div>
-    </>
+    </GoogleOAuthProvider>
   );
 }
 
