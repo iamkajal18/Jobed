@@ -113,7 +113,7 @@ const TopCompanies = () => {
       </div>
       <Slider {...settings}>
         {company.map((company, index) => (
-          <div key={index} className="p-4">
+          <div key={index} className="p-2">
             <div className="border p-3 rounded-lg shadow-lg flex flex-col items-center max-w-xs mx-auto">
               <img
                 src={`http://res.cloudinary.com/djahxpuyx/${company.image}`}
