@@ -3,8 +3,56 @@ import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Using react-icons for example
+// Custom arrow component for the next button
+const SampleNextArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div
+      className="slick-arrow slick-next"
+      onClick={onClick}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: "24px",
+        width: "30px",
+        height: "30px",
+        zIndex: 1,
+        color: "#1e40af", // Arrow color
+        cursor: "pointer",
+      }}
+    >
+      <span>→</span>
+    </div>
+  );
+};
+
+// Custom arrow component for the previous button
+const SamplePrevArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div
+      className="slick-arrow slick-prev"
+      onClick={onClick}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: "24px",
+        width: "30px",
+        height: "30px",
+        zIndex: 1,
+        color: "#1e40af", // Arrow color
+        cursor: "pointer",
+      }}
+    >
+      <span>←</span>
+    </div>
+  );
+};
+
 const TopCompanies = () => {
   const [company, setCompany] = useState([]);
 
@@ -13,10 +61,9 @@ const TopCompanies = () => {
       try {
         const response = await axios.get(
           "https://jobedinwebsite-production.up.railway.app/api/get_companies/"
-        );
+        ); // Replace with your backend URL
         setCompany(response.data.comapnies);
         console.log(response.data.comapnies);
-
         localStorage.setItem("comapnies", response.data.comapnies);
       } catch (error) {
         console.log(error);
@@ -26,70 +73,63 @@ const TopCompanies = () => {
     fetchCompany();
   }, []);
 
-  // Settings for the carousel
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
-    prevArrow: <FaArrowLeft style={{ fontSize: '20px', color: '#333' }} />, // Custom left arrow
-    nextArrow: <FaArrowRight style={{ fontSize: '20px', color: '#333' }} />, // Custom right arrow
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
-        breakpoint: 640,
+        breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 4,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 5,
+          slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
     ],
   };
 
   return (
-    <div className="max-w-6xl mx-auto my-8 px-4">
+    <div className="max-w-6xl mx-auto my-8">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Top companies</h2>
-        <a href="/view-all" className="text-blue-500">
+        <h2 className="text-xl font-semibold">Top Companies</h2>
+        <Link to="/view-all" className="text-blue-500">
           View all
-        </a>
+        </Link>
       </div>
-
-      {/* Slick carousel */}
       <Slider {...settings}>
         {company.map((company, index) => (
-          <div key={index}>
-            <div className="border p-4 rounded-lg shadow-lg flex flex-col items-center">
+          <div key={index} className="p-4">
+            <div className="border p-3 rounded-lg shadow-lg flex flex-col items-center max-w-xs mx-auto">
               <img
                 src={`http://res.cloudinary.com/djahxpuyx/${company.image}`}
                 alt={company.company_name}
-                className="h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 mb-4 object-cover"
+                className="h-14 w-14 mb-4"
               />
-              <h3 className="font-bold text-sm sm:text-md text-center">
-                {company.company_name}
-              </h3>
-              <div className="flex items-center mt-2 space-x-1">
+              <h3 className="font-bold text-lg text-center">{company.company_name}</h3>
+              <div className="flex items-center mt-2">
                 <span className="text-yellow-400 text-lg">★</span>
-                <span>{company.rating}</span>
-                <span className="text-gray-500">{company.reviews} reviews</span>
+                <span className="ml-1">{company.rating}</span>
+                <span className="ml-2 text-gray-500">
+                  {company.reviews} reviews
+                </span>
+                <span className="ml-2 text-gray-500">
+                  {company.company_address}
+                </span>
               </div>
-              <p className="text-gray-500 text-xs sm:text-sm mt-2 text-center">
-                {company.company_address}
-              </p>
-              <a href="/view-jobs" className="text-blue-500 mt-2">
+              <Link to="/view-jobs" className="text-blue-500 mt-4">
                 View jobs
-              </a>
+              </Link>
             </div>
           </div>
         ))}
