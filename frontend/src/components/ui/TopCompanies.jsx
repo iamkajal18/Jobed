@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
+
 // Custom arrow component for the next button
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -48,7 +49,9 @@ const SamplePrevArrow = (props) => {
         cursor: "pointer",
       }}
     >
+
       <span>←</span>
+     
     </div>
   );
 };
@@ -98,18 +101,22 @@ const TopCompanies = () => {
       },
     ],
   };
+  
 
   return (
-    <div className="max-w-6xl mx-auto my-8">
+    <div className="max-w-6xl mx-auto my-4 text-center">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Top Companies</h2>
-        <Link to="/view-all" className="text-blue-500">
+      <h2 className="text-xl font-bold ">
+          {" "}
+          <span className="text-red-600">Top  </span>  Companies
+        </h2>
+        <Link to="/viewcompanies" className="text-blue-500">
           View all
         </Link>
       </div>
       <Slider {...settings}>
         {company.map((company, index) => (
-          <div key={index} className="p-4">
+          <div key={index} className="p-2">
             <div className="border p-3 rounded-lg shadow-lg flex flex-col items-center max-w-xs mx-auto">
               <img
                 src={`http://res.cloudinary.com/djahxpuyx/${company.image}`}
