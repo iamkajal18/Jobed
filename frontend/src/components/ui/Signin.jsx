@@ -18,26 +18,23 @@ const Signin = () => {
   useEffect(() => {
     const handleGoogleAuth = async () => {
       console.log("Current URL:", window.location.href);
-      
       const urlParams = new URLSearchParams(window.location.search);
       console.log("URL Parameters:", Object.fromEntries(urlParams.entries()));
-
-      // Check for different possible token parameters
       const token = urlParams.get("token") || 
                    urlParams.get("access_token") || 
                    urlParams.get("id_token");
                    
       console.log("Found token:", token);
       
-      try {
+      try{
         // Get user info from Google
         const userInfoResponse = await axios.get(
-          "https://www.googleapis.com/oauth2/v3/userinfo",
-          {
+          "https://jobedinwebsite-production.up.railway.app/api/user-data",
+           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+           }
         );
 
         if (userInfoResponse.data) {
