@@ -26,7 +26,7 @@ const UserProfileCard = () => {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get(`https://127.0.0.1:8000/api/profile/${id}`);
+      const response = await axios.get(`https://jobedinwebsite-production.up.railway.app/api/profile/${id}`);
       setUserDetails(response.data.data);
     } catch (err) {
       setError('Failed to fetch user details');
