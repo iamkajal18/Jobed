@@ -98,11 +98,15 @@ const TopCompanies = () => {
       },
     ],
   };
+  
 
   return (
-    <div className="max-w-6xl mx-auto my-8">
+    <div className="max-w-6xl mx-auto my-4 text-center">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Top Companies</h2>
+      <h2 className="text-xl font-bold ">
+          {" "}
+          <span className="text-red-600">Top  </span>  Companies
+        </h2>
         <Link to="/view-all" className="text-blue-500">
           View all
         </Link>
