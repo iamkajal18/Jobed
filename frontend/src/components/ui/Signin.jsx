@@ -39,7 +39,7 @@ const Signin = () => {
         // Store authentication data
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
-        localStorage.setItem("image", response.data.user.avatar_url);
+        localStorage.setItem("image", response.data.user.image);
 
         if (response.data.user.type === "Recruiter") {
           window.location.href = "https://jobedinwebsite-production.up.railway.app/admin/";
