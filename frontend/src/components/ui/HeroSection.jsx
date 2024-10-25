@@ -59,7 +59,7 @@ function JobSearch() {
 function LatestJob() {
   return (
     <>
-      <div className="container mx-auto text-center">
+      <div className="container mx-auto text-center mt-9">
         <h2 className="text-xl font-bold ">
           {" "}
           <span className="text-red-600">Latest Job </span> & Opportunty
