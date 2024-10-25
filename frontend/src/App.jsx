@@ -35,7 +35,7 @@ function App() {
 
     {
       path: "/job",
-      element: <Job job={job} />,
+      element: <Job  />,
     },
     {
       path: "/jobcard/:id",
