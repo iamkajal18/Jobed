@@ -4,33 +4,31 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Import new chevron icons
-import { BiLoaderCircle } from "react-icons/bi"; // Loader icon
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { BiLoaderCircle } from "react-icons/bi";
 
-// Custom next arrow component with modern chevron design
 const SampleNextArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="slick-arrow slick-next flex justify-center items-center w-12 h-12 bg-blue-500 rounded-full cursor-pointer text-white"
+      className="slick-arrow slick-next flex justify-center items-center w-6 h-5 bg-blue-500 rounded-full cursor-pointer text-blue-900 hover:bg-black"
       onClick={onClick}
       style={{ zIndex: 1 }}
     >
-      <FaChevronRight size={20} />
+      <FaChevronRight size={16} />
     </div>
   );
 };
 
-// Custom previous arrow component with modern chevron design
 const SamplePrevArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="slick-arrow slick-prev flex justify-center items-center w-12 h-12 bg-blue-500 rounded-full cursor-pointer text-white"
+      className="slick-arrow slick-prev flex justify-center items-center w-6 h-5 bg-blue-500 rounded-full cursor-pointer text-blue-900 hover:bg-black"
       onClick={onClick}
       style={{ zIndex: 1 }}
     >
-      <FaChevronLeft size={20} />
+      <FaChevronLeft size={16} />
     </div>
   );
 };
@@ -46,8 +44,8 @@ const TopCompanies = () => {
         const response = await axios.get(
           "https://jobedinwebsite-production.up.railway.app/api/get_companies/"
         );
-        setCompanies(response.data.comapnies); // Fix Typo in 
-        localStorage.setItem("companies", JSON.stringify(response.data.comapnies)); // Typo in the API response
+        setCompanies(response.data.comapnies);
+        localStorage.setItem("companies", JSON.stringify(response.data.comapnies));
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -98,36 +96,36 @@ const TopCompanies = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto my-4 text-center">
-  <div className="flex justify-between items-center mb-4">
-    <h2 className="text-xl font-bold text-center flex-auto">
-      <span className="text-red-600">Top</span> Companies
-    </h2>
-    <Link to="/viewcompanies" className="text-blue-500">
-      View all
-    </Link>
-  </div>
+    <div className="max-w-4xl mx-auto my-4 text-center">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-bold text-center flex-auto">
+          <span className="text-red-600">Top</span> Companies
+        </h2>
+        <Link to="/viewcompanies" className="text-blue-500 text-sm">
+          View all
+        </Link>
+      </div>
       <Slider {...settings}>
         {companies.map((company, index) => (
           <div key={index} className="p-2">
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center max-w-xs mx-auto">
+            <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center max-w-xs mx-auto">
               <img
                 src={`http://res.cloudinary.com/djahxpuyx/${company.image}`}
                 alt={company.company_name}
-                className="h-16 w-16 mb-4 rounded-full object-cover"
+                className="h-12 w-12 mb-3 rounded-full object-cover"
               />
-              <h3 className="text-lg font-bold text-gray-700">{company.company_name}</h3>
-              <div className="flex items-center mt-2">
-                <span className="text-yellow-400 text-lg">★</span>
-                <span className="ml-1 font-semibold">{company.rating}</span>
-                <span className="ml-2 text-gray-500">
+              <h3 className="text-md font-semibold text-gray-700">{company.company_name}</h3>
+              <div className="flex items-center mt-1">
+                <span className="text-yellow-400 text-base">★</span>
+                <span className="ml-1 text-sm font-medium">{company.rating}</span>
+                <span className="ml-2 text-gray-500 text-xs">
                   ({company.reviews} reviews)
                 </span>
               </div>
-              <p className="mt-2 text-gray-500 text-sm text-center">{company.company_address}</p>
+              <p className="mt-1 text-gray-500 text-xs text-center">{company.company_address}</p>
               <Link
                 to="/view-jobs"
-                className="mt-4 text-blue-600 hover:text-blue-800 hover:underline"
+                className="mt-3 text-blue-600 text-xs hover:text-blue-800 hover:underline"
               >
                 View jobs
               </Link>
