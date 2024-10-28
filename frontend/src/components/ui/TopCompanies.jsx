@@ -11,7 +11,7 @@ const SampleNextArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="slick-arrow slick-next flex justify-center items-center w-6 h-5 bg-blue-500 rounded-full cursor-pointer text-blue-900 hover:bg-black"
+      className="slick-arrow slick-next flex justify-center items-center w-4 h-5 bg-blue-500 rounded-full cursor-pointer text-blue-900 hover:bg-black"
       onClick={onClick}
       style={{ zIndex: 1 }}
     >
@@ -24,7 +24,7 @@ const SamplePrevArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="slick-arrow slick-prev flex justify-center items-center w-6 h-5 bg-blue-500 rounded-full cursor-pointer text-blue-900 hover:bg-black"
+      className="slick-arrow slick-prev flex justify-center items-center w-4 h-5 bg-blue-500 rounded-full cursor-pointer text-blue-900 hover:bg-black"
       onClick={onClick}
       style={{ zIndex: 1 }}
     >
@@ -61,7 +61,7 @@ const TopCompanies = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 5,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
@@ -69,14 +69,14 @@ const TopCompanies = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 5,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -107,28 +107,17 @@ const TopCompanies = () => {
       </div>
       <Slider {...settings}>
         {companies.map((company, index) => (
-          <div key={index} className="p-2">
-            <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center max-w-xs mx-auto">
+          <div key={index} className="mr-4 ml-4" >
+            <div className="bg-white p-2 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center max-w-40 mx-auto">
               <img
                 src={`http://res.cloudinary.com/djahxpuyx/${company.image}`}
                 alt={company.company_name}
                 className="h-12 w-12 mb-3 rounded-full object-cover"
               />
-              <h3 className="text-md font-semibold text-gray-700">{company.company_name}</h3>
+              <h2 className=" font-semibold text-gray-700">{company.company_name}</h2>
               <div className="flex items-center mt-1">
-                <span className="text-yellow-400 text-base">★</span>
-                <span className="ml-1 text-sm font-medium">{company.rating}</span>
-                <span className="ml-2 text-gray-500 text-xs">
-                  ({company.reviews} reviews)
-                </span>
               </div>
               <p className="mt-1 text-gray-500 text-xs text-center">{company.company_address}</p>
-              <Link
-                to="/view-jobs"
-                className="mt-3 text-blue-600 text-xs hover:text-blue-800 hover:underline"
-              >
-                View jobs
-              </Link>
             </div>
           </div>
         ))}

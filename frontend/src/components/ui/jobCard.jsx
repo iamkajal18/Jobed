@@ -78,10 +78,7 @@ function JobCard() {
                   <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
                   Location: {job.location || "Not specified"}
                 </p>
-                {/* <p className="text-gray-600 mb-2">
-                  <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
-                  Experience: {job.experience || "Not specified"}
-                </p> */}
+               
                 <p className="text-gray-600 mb-2">
                   <FontAwesomeIcon icon={faDollarSign} className="mr-2" />
                   Salary: {job.salary || "Not disclosed"}

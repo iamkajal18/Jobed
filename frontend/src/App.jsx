@@ -9,7 +9,6 @@ import HeroSection from "./components/ui/HeroSection";
 import AboutUs from "./components/ui/AboutUs";
 import Services from "./components/ui/Services";
 import ContactUs from "./components/ui/ContactUs";
-import Profile from "./components/ui/Profile";
 import JobCard from "./components/ui/jobCard";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import CompaniesList from "./components/ui/CompaniesList";
@@ -41,10 +40,7 @@ function App() {
       path: "/viewcompanies",
       element: <CompaniesList />,
     },
-    {
-      path: "/profile/:id",
-      element: <Profile />,
-    },
+    
     {
       path: "/sign-up",
       element: <Signup />,
@@ -61,6 +57,7 @@ function App() {
       path: "/services",
       element: <Services />,
     },
+    
     {
       path: "/contact-us",
       element: <ContactUs />,
