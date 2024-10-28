@@ -54,31 +54,13 @@ const Footer = () => {
   );
 };
 
-const Serives2 = () => {
-    return (
-      <div className="home-container p-8">
-        {/* Other homepage content here */}
-        
-        <section className="services-brief bg-blue-100 p-6 mt-8 rounded-lg">
-          <h2 className="text-3xl font-bold mb-3">Our Services</h2>
-          <p className="text-lg mb-4">
-            At JobedIn, we provide tailored solutions for job seekers and employers to enhance your
-            hiring experience. Discover how we can assist you!
-          </p>
-          <Link to="/services" className="text-blue-600 font-semibold hover:underline">
-            Learn more about our services
-          </Link>
-        </section>
-      </div>
-    );
-  };
+
   
 function Services() {
   return (
     <div>
       <Navbar/>
         < Serives1/>
-        < Serives2/>
         <Footer />
         
     </div>
