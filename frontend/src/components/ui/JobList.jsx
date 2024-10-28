@@ -69,9 +69,12 @@ const JobList = () => {
 
               <p className="text-gray-500 mb-5 text-sm flex-grow">{jobb.postition}</p>
               <div className="mt-auto flex items-center justify-between text-gray-600">
-                <span className="flex items-center">
-                  <FaRupeeSign className="mr-1" /> {jobb.salary}
-                </span>
+                <div className="justify-between flex">
+               
+                  <FaRupeeSign /> 
+                  <span>{jobb.salary}</span>
+               
+                </div>
                 <span className="text-blue-500 font-semibold text-sm">
                   {jobb.job_type}
                 </span>

@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 import {
   faMapMarkerAlt,
-  faDollarSign,
+  faRupeeSign,
   faBriefcase,
   faCalendarAlt,
   faClock,
@@ -80,8 +80,8 @@ function JobCard() {
                 </p>
                
                 <p className="text-gray-600 mb-2">
-                  <FontAwesomeIcon icon={faDollarSign} className="mr-2" />
-                  Salary: {job.salary || "Not disclosed"}
+                  
+                  Salary: ₹{job.salary || "Not disclosed"}
                 </p>
                 <p className="text-gray-600">
                   <FontAwesomeIcon icon={faClock} className="mr-2" />

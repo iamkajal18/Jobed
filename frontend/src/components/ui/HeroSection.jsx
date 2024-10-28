@@ -74,7 +74,7 @@ function LatestJob() {
 
 function Features() {
   return (
-    <div className="bg-gray-100 py-20">
+    <div className="bg-gray-100 py-8">
       <div className="container mx-auto text-center">
         <h2 className="text-xl font-bold mb-12">
           {" "}
@@ -112,7 +112,7 @@ function Features() {
 
 function Testimonials() {
   return (
-    <div className="py-20">
+    <div className="py-8">
       <div className="container mx-auto text-center">
         <h2 className="text-2xl font-bold mb-12">
           {" "}
