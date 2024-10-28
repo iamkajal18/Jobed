@@ -77,7 +77,7 @@ const Signup = () => {
           position: "top-right",
         });
         if(res.data.user.type=="Recruiter"){
-          windows.location.href="https://jobedinwebsite-production.up.railway.app/admin/"
+          window.location.href="https://jobedinwebsite-production.up.railway.app/admin/"
         }
         navigate("/sign-in");
       } else {
