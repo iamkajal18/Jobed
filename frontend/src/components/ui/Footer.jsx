@@ -4,17 +4,14 @@ function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 py-10">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-        
-        {/* Left Section - Quick Links */}
         <div className="flex flex-col space-y-4">
           <h3 className="text-lg font-semibold text-white">Quick Links</h3>
-          <div className="grid grid-cols-2 gap-2">
+          <div className=" grid-cols-2 flex justify-between gap-x-0 gap-y-0">
             <a href="/" className="hover:text-white transition-colors duration-200">Home</a>
             <a href="/about-us" className="hover:text-white transition-colors duration-200">About</a>
             <a href="/contact-us" className="hover:text-white transition-colors duration-200">Help</a>
-            <a href="/terms" className="hover:text-white transition-colors duration-200">Terms of Service</a>
-            <a href="/privacy" className="hover:text-white transition-colors duration-200">Privacy Policy</a>
-            <a href="/careers" className="hover:text-white transition-colors duration-200">Careers</a>
+            <a href="/services" className="hover:text-white transition-colors duration-200">Terms of Service</a>
+            
           </div>
         </div>
 
