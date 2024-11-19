@@ -64,7 +64,7 @@ function Skill() {
         <div className="border-2 w-20 border-top-color my-3" />
         {/* i want to give a gap when it go down in the next line */}
         <ul className="justify-self-auto gap-y-2 flex flex-wrap space-x-1 ">
-          {skill.split(",").map((skill, index) => (
+          {skill?.split(",").map((skill, index) => (
             <li
               key={index}
               className="bg-gray-200 rounded-full px-2 py-1 text-xs"

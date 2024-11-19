@@ -139,12 +139,16 @@ const ProfessionalExperience = ({ userExperiences }) => {
                 Key Responsibilities
               </p>
               <ul className="text-sm list-disc pl-4 space-y-1">
-                {experience?.responsibilities
-                  ?.split(",")
-                  .map((responsibility, idx) => (
-                    <li key={idx}>{responsibility.trim()}</li>
-                  ))}
-              </ul>
+  {experience?.responsibilities
+    ? experience.responsibilities
+        .split(",")
+        .map((responsibility) => responsibility.trim())
+        .filter(Boolean) // Remove empty entries
+        .map((responsibility, idx) => (
+          <li key={idx}>{responsibility}</li>
+        ))
+    : <li>No responsibilities listed</li>}
+</ul>
             </div>
           ))
         ) : (
