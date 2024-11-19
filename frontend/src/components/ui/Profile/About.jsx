@@ -10,7 +10,7 @@ function About() {
   const [isOpen, setIsOpen] = useState(false);
   const fetchAbout = async () => {
     const response = await axios.get(
-      `https://127.0.0.1:8000/api/about_get/${id}`
+      `https://jobedinwebsite-production.up.railway.app/api/about_get/${id}`
     )
       setAbout(response.data.data.about);
   };
@@ -20,7 +20,7 @@ function About() {
   const updateAbout = async () => {
     try{
     const response = await axios.put(
-      `https://127.0.0.1:8000/api/about_update/${id}`,
+      `https://jobedinwebsite-production.up.railway.app/api/about_update/${id}`,
       {about}
     );
     setIsOpen(false);

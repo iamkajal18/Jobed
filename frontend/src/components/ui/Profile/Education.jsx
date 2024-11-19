@@ -69,7 +69,7 @@ function Education({education}) {
       grade: "",
     });
     try {
-        await axios.put(`https://127.0.0.1:8000/api/education_update/${id}`, {
+        await axios.put(`https://jobedinwebsite-production.up.railway.app/api/education_update/${id}`, {
           education: educationList,
         });
         alert("Education updated successfully!");

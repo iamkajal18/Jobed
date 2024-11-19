@@ -8,7 +8,7 @@ function Skill() {
   const skillDetails= async()=>{
     try{
         const response= await axios.get(
-            `https://127.0.0.1:8000/api/skill_get/${id}`
+            `https://jobedinwebsite-production.up.railway.app/api/skill_get/${id}`
         )
 
         let responseSkill=response.data.skill;
@@ -32,7 +32,7 @@ function Skill() {
     try {
       const response = await axios.put(
         
-        `https://127.0.0.1:8000/api/skill_update/${id}`,
+        `https://jobedinwebsite-production.up.railway.app/api/skill_update/${id}`,
          {skill},
       );
       if (response.data.success){

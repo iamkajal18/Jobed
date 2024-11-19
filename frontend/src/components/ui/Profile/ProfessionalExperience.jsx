@@ -64,7 +64,7 @@ const ProfessionalExperience = ({ userExperiences }) => {
       responsibilities: "",
     });
     try {
-      await axios.put(`https://127.0.0.1:8000/api/experience_update/${id}`, {
+      await axios.put(`https://jobedinwebsite-production.up.railway.app/api/experience_update/${id}`, {
         experience: expList,
       });
       alert("Experience updated successfully!");

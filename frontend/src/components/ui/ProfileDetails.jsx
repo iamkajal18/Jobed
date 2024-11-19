@@ -30,7 +30,7 @@ function ProfileDetails() {
   const profileFetch = async () => {
     try {
       const response = await axios.get(
-        `https://127.0.0.1:8000/api/get_profile_by_id/${id}`
+        `https://jobedinwebsite-production.up.railway.app/api/get_profile_by_id/${id}`
         // calling the api to get the profile details
       );
       if (response.status === 200) {
