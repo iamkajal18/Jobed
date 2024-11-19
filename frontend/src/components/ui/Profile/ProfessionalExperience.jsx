@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // Ensure you're importing this hook
 import axios from "axios";
+
 const ProfessionalExperience = ({ userExperiences }) => {
-  const { id } = useParams();
-  // state management
+  const { id } = useParams(); // Extract `id` from URL parameters
+
+  // State management
   const [expList, setExpList] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -17,13 +19,14 @@ const ProfessionalExperience = ({ userExperiences }) => {
     responsibilities: "",
   });
 
+  // Populate experience list when the user experiences are passed
   useEffect(() => {
     if (userExperiences && userExperiences.length) {
       setExpList(userExperiences);
-
     }
   }, [userExperiences]);
 
+  // Open modal for editing or adding an experience
   const openModal = (index = null) => {
     if (index !== null) {
       setNewExp(expList[index]);
@@ -43,6 +46,7 @@ const ProfessionalExperience = ({ userExperiences }) => {
     setIsOpen(true);
   };
 
+  // Save experience
   const saveExp = async () => {
     if (editingIndex !== null) {
       const updatedList = [...expList];
@@ -51,7 +55,8 @@ const ProfessionalExperience = ({ userExperiences }) => {
     } else {
       setExpList([...expList, exp]);
     }
-    
+
+    // Reset state
     setEditingIndex(null);
     setIsOpen(false);
     setNewExp({
@@ -63,19 +68,23 @@ const ProfessionalExperience = ({ userExperiences }) => {
       end_date: "",
       responsibilities: "",
     });
+
+    // Send updated experience to the backend
     try {
-      await axios.put(`https://jobedinwebsite-production.up.railway.app/api/experience_update/${id}`, {
-        experience: expList,
-      });
+      await axios.put(
+        `https://jobedinwebsite-production.up.railway.app/api/experience_update/${id}`,
+        { experience: expList }
+      );
       alert("Experience updated successfully!");
     } catch (error) {
       alert("Failed to update experience. Please try again.");
       console.error(error);
     }
-    
   };
+
   return (
     <div className="py-3">
+      {/* Header with Add Button */}
       <div className="flex justify-stretch">
         <h2 className="text-lg font-poppins font-bold text-top-color">
           Professional Experience
@@ -91,17 +100,19 @@ const ProfessionalExperience = ({ userExperiences }) => {
         </button>
       </div>
 
+      {/* Divider */}
       <div className="border-2 w-20 border-top-color my-3"></div>
 
+      {/* Experience List */}
       <div className="flex flex-col">
         {expList.length > 0 ? (
           expList.map((experience, index) => (
             <div key={index} className="flex flex-col my-4">
               <div className="flex justify-stretch">
-              <p className="text-md font-bold text-gray-700">
-                {experience.company_name} | {experience.position}
-              </p>
-              <button
+                <p className="text-md font-bold text-gray-700">
+                  {experience.company_name} | {experience.position}
+                </p>
+                <button
                   onClick={() => openModal(index)}
                   className="text-gray-500 hover:text-gray-700"
                 >
@@ -120,18 +131,19 @@ const ProfessionalExperience = ({ userExperiences }) => {
                     />
                   </svg>
                 </button>
-                </div>
-              
+              </div>
               <p className="font-semibold text-sm text-gray-700">
                 {experience.start_date} - {experience.end_date || "Present"}
               </p>
               <p className="font-semibold text-sm text-gray-700 mt-2 mb-1">
                 Key Responsibilities
-              </p>{}
+              </p>
               <ul className="text-sm list-disc pl-4 space-y-1">
-                {experience?.responsibilities?.split(",").map((responsibility, idx) => (
-                  <li key={idx}>{responsibility.trim()}</li>
-                ))}
+                {experience?.responsibilities
+                  ?.split(",")
+                  .map((responsibility, idx) => (
+                    <li key={idx}>{responsibility.trim()}</li>
+                  ))}
               </ul>
             </div>
           ))
@@ -140,6 +152,7 @@ const ProfessionalExperience = ({ userExperiences }) => {
         )}
       </div>
 
+      {/* Modal for Add/Edit */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-xl w-[500px] max-w-full p-6">
@@ -189,26 +202,23 @@ const ProfessionalExperience = ({ userExperiences }) => {
               <textarea
                 value={exp.responsibilities}
                 onChange={(e) =>
-                  setNewExp({
-                    ...exp,
-                    responsibilities:e.target.value,
-                  })
+                  setNewExp({ ...exp, responsibilities: e.target.value })
                 }
-                placeholder="Responsibilities (separate by comma)"
-                className="w-full px-3 py-2 border rounded-md h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Responsibilities (comma-separated)"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <div className="flex justify-end space-x-2 mt-6">
+            <div className="flex justify-end mt-4">
               <button
                 onClick={() => setIsOpen(false)}
-                className="px-4 py-2 border rounded-md text-gray-600 hover:bg-gray-100"
+                className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md mr-2"
               >
                 Cancel
               </button>
               <button
                 onClick={saveExp}
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-gray-600"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
               >
                 Save
               </button>
