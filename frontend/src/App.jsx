@@ -12,6 +12,7 @@ import ContactUs from "./components/ui/ContactUs";
 import JobCard from "./components/ui/jobCard";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import CompaniesList from "./components/ui/CompaniesList";
+import ProfileDetails from "./components/ui/ProfileDetails";
 
 
 
@@ -35,6 +36,11 @@ function App() {
       path: "/jobcard/:id",
       element: <JobCard />,
     },
+    {
+      path:"/profile/:id",
+      element:<ProfileDetails></ProfileDetails>
+    }
+,
 
     {
       path: "/viewcompanies",
