@@ -4,7 +4,7 @@ import axios from "axios";
 
 const ProfessionalExperience = ({ userExperiences }) => {
   const { id } = useParams(); // Extract `id` from URL parameters
-
+  console.log(userExperiences)
   // State management
   const [expList, setExpList] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
@@ -48,14 +48,28 @@ const ProfessionalExperience = ({ userExperiences }) => {
 
   // Save experience
   const saveExp = async () => {
+    let updatedList;
     if (editingIndex !== null) {
-      const updatedList = [...expList];
+      updatedList = [...expList];
       updatedList[editingIndex] = exp;
-      setExpList(updatedList);
     } else {
-      setExpList([...expList, exp]);
+      updatedList = [...expList, exp];
     }
+    setExpList(updatedList);
+  
 
+    try {
+      const response=await axios.put(
+        `https://127.0.0.1:8000/api/experience_update/${id}`, 
+        { experience: updatedList }
+      );
+      if (response.data){
+      alert("Experience updated successfully!");}
+    } catch (error) {
+      alert("Failed to update experience. Please try again.");
+      console.error(error);
+    }
+  
     // Reset state
     setEditingIndex(null);
     setIsOpen(false);
@@ -68,18 +82,6 @@ const ProfessionalExperience = ({ userExperiences }) => {
       end_date: "",
       responsibilities: "",
     });
-
-    // Send updated experience to the backend
-    try {
-      await axios.put(
-        `https://jobedinwebsite-production.up.railway.app/api/experience_update/${id}`,
-        { experience: expList }
-      );
-      alert("Experience updated successfully!");
-    } catch (error) {
-      alert("Failed to update experience. Please try again.");
-      console.error(error);
-    }
   };
 
   return (
